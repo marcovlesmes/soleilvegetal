@@ -1,23 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
+<div>
+    <h1>Obras</h1>
+    <a href="#">Contacto</a>
+</div>
+<div>
+    Filtrar por: <a href="#">Artista</a> <a href="#">Técnica</a>
+</div>
+<div>
+    @foreach ($items as $item)
+        <div>
+            <img src="{{ $item->image_source }}" alt="{{ $item->name }}">
+            {{ $item->name }} - {{ $item->year }}
+            {{ $item->autor }}
+            {{ $item->format }} - {{ $item->price }}
         </div>
-    </div>
+    @endforeach
 </div>
 @endsection

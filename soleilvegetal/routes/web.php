@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('index');
+Route::resource('autors', \App\Http\Controllers\AutorController::class);
+Route::resource('artworks', \App\Http\Controllers\ArtworkController::class);
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
