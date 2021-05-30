@@ -16,6 +16,9 @@ module.exports = {
     boxShadow: {
       'icon': 'rgba(6 78 59) 0 0 2px'
     },
+    maxWidth: {
+      'sidebar': '3rem'
+    },
     extend: {},
   },
   variants: {

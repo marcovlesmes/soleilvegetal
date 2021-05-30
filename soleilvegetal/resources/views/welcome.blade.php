@@ -22,8 +22,8 @@
         .group:hover>ul {display: block;}
     </style>
 </head>
-<body>
-    <div class="container mx-auto mt-5 bg-gray-50">
+<body class="bg-gray-200">
+    <div class="container mx-auto mt-5">
         <nav class="flex justify-evenly items-center">
             <img src="{{ asset('images/soleil-vegetal-logo.png') }}" alt="Soleil Vegetal">
             <ul class="flex-grow flex justify-evenly">
