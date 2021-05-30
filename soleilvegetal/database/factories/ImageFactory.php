@@ -23,9 +23,10 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
-            'artwork_id' => Artwork::class,
-            'image_source' => $this->faker->imageUrl(640, 480, 'art'),
+            'artwork_id' => Artwork::factory(),
+            'image_source' => $this->faker->imageUrl(800, 600, 'art'),
             'priority' => $this->faker->randomDigit()
         ];
     }
+
 }

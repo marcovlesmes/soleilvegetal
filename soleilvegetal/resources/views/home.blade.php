@@ -11,10 +11,12 @@
 <div>
     @foreach ($items as $item)
         <div>
-            <img src="{{ $item->image_source }}" alt="{{ $item->name }}">
+            <img src="{{ asset($item->image->first()->image_source) }}" alt="{{ $item->name }}">
             {{ $item->name }} - {{ $item->year }}
-            {{ $item->autor }}
-            {{ $item->format }} - {{ $item->price }}
+            @foreach ($item->autor as $autor)
+            {{ $autor->name }}
+            @endforeach
+            {{ $item->format }} - ${{ $item->price }}
         </div>
     @endforeach
 </div>
