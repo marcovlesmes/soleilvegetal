@@ -9,6 +9,9 @@
                     @foreach ($autors as $autor)
                     <li class="text-primary font-normal capitalize hover:text-secondary text-sm max-w-max p-0 py-3 text-center mx-auto"><a href="{{ route('autors.show', $autor->id) }}">{{$autor->name}}</a></li>
                     @endforeach
+                    @if ($autors->hasMorePages())
+                    <li class="text-primary font-normal capitalize hover:text-secondary text-sm max-w-max p-0 py-3 text-center mx-auto"><a href="{{ route('autors.index') }}">Ver todos</a></li>
+                    @endif
                 </ul>
             </li>
             <li class="group uppercase text-primary text-sm font-semibold hover:text-secondary">
@@ -39,5 +42,7 @@
             </div>
         @endforeach
     </div>
-    {{ $items->links() }}
+    @if (isset($items->links))
+        {{ $items->links() }}
+    @endif
 @endsection

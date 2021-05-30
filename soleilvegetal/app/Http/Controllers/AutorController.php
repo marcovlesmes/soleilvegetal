@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Autor;
 use Illuminate\Http\Request;
 
 class AutorController extends Controller
@@ -45,7 +46,10 @@ class AutorController extends Controller
      */
     public function show($id)
     {
-        return dd('View for autor ' . $id);
+        $autor = Autor::find($id);
+        $items = $autor->artwork;
+        $autors = Autor::paginate(10);
+        return view('home', compact('autors', 'items'));
     }
 
     /**
