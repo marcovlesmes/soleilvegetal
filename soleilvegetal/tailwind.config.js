@@ -21,6 +21,7 @@ module.exports = {
       'standart': '#0E2210'
     },
     extend: {},
+    
   },
   variants: {
     extend: {
