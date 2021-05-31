@@ -19,7 +19,12 @@ module.exports = {
     maxWidth: {
       'sidebar': '3rem'
     },
+    container: {
+      center: true,
+
+    },
     extend: {},
+    
   },
   variants: {
     extend: {
