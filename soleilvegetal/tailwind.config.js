@@ -12,7 +12,9 @@ module.exports = {
     },
     gridTemplateColumns: {
       'sidebar': '2rem auto',
-      'gallery': 'repeat(3, minmax(0, 1fr))'
+      'dictionary': 'repeat(2, minmax(0, 1fr))',
+      'gallery': 'repeat(3, minmax(0, 1fr))',
+      'detail': 'repeat(5, minmax(0, 1fr))'
     },
     textColor: {
       'primary' : '#2F6439',

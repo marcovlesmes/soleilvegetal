@@ -553,8 +553,6 @@ video {
 
 .container {
   width: 100%;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 @media (min-width: 640px) {
@@ -26297,16 +26295,32 @@ video {
   grid-template-columns: 2rem auto;
 }
 
+.grid-cols-dictionary {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .grid-cols-gallery {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-detail {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .group:hover .group-hover\:grid-cols-sidebar {
   grid-template-columns: 2rem auto;
 }
 
+.group:hover .group-hover\:grid-cols-dictionary {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .group:hover .group-hover\:grid-cols-gallery {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.group:hover .group-hover\:grid-cols-detail {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .auto-cols-auto {
@@ -30425,8 +30439,6 @@ video {
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
-    margin-right: auto;
-    margin-left: auto;
   }
 
   @media (min-width: 640px) {
@@ -56156,16 +56168,32 @@ video {
     grid-template-columns: 2rem auto;
   }
 
+  .sm\:grid-cols-dictionary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .sm\:grid-cols-gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-detail {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .group:hover .sm\:group-hover\:grid-cols-sidebar {
     grid-template-columns: 2rem auto;
   }
 
+  .group:hover .sm\:group-hover\:grid-cols-dictionary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .group:hover .sm\:group-hover\:grid-cols-gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .group:hover .sm\:group-hover\:grid-cols-detail {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .sm\:auto-cols-auto {
@@ -60127,8 +60155,6 @@ video {
 @media (min-width: 768px) {
   .md\:container {
     width: 100%;
-    margin-right: auto;
-    margin-left: auto;
   }
 
   @media (min-width: 640px) {
@@ -85858,16 +85884,32 @@ video {
     grid-template-columns: 2rem auto;
   }
 
+  .md\:grid-cols-dictionary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .md\:grid-cols-gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-detail {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .group:hover .md\:group-hover\:grid-cols-sidebar {
     grid-template-columns: 2rem auto;
   }
 
+  .group:hover .md\:group-hover\:grid-cols-dictionary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .group:hover .md\:group-hover\:grid-cols-gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .group:hover .md\:group-hover\:grid-cols-detail {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .md\:auto-cols-auto {
@@ -89829,8 +89871,6 @@ video {
 @media (min-width: 1024px) {
   .lg\:container {
     width: 100%;
-    margin-right: auto;
-    margin-left: auto;
   }
 
   @media (min-width: 640px) {
@@ -115560,16 +115600,32 @@ video {
     grid-template-columns: 2rem auto;
   }
 
+  .lg\:grid-cols-dictionary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .lg\:grid-cols-gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-detail {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .group:hover .lg\:group-hover\:grid-cols-sidebar {
     grid-template-columns: 2rem auto;
   }
 
+  .group:hover .lg\:group-hover\:grid-cols-dictionary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .group:hover .lg\:group-hover\:grid-cols-gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .group:hover .lg\:group-hover\:grid-cols-detail {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .lg\:auto-cols-auto {
@@ -119531,8 +119587,6 @@ video {
 @media (min-width: 1280px) {
   .xl\:container {
     width: 100%;
-    margin-right: auto;
-    margin-left: auto;
   }
 
   @media (min-width: 640px) {
@@ -145262,16 +145316,32 @@ video {
     grid-template-columns: 2rem auto;
   }
 
+  .xl\:grid-cols-dictionary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .xl\:grid-cols-gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-detail {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .group:hover .xl\:group-hover\:grid-cols-sidebar {
     grid-template-columns: 2rem auto;
   }
 
+  .group:hover .xl\:group-hover\:grid-cols-dictionary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .group:hover .xl\:group-hover\:grid-cols-gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .group:hover .xl\:group-hover\:grid-cols-detail {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .xl\:auto-cols-auto {
@@ -149233,8 +149303,6 @@ video {
 @media (min-width: 1536px) {
   .\32xl\:container {
     width: 100%;
-    margin-right: auto;
-    margin-left: auto;
   }
 
   @media (min-width: 640px) {
@@ -174964,16 +175032,32 @@ video {
     grid-template-columns: 2rem auto;
   }
 
+  .\32xl\:grid-cols-dictionary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .\32xl\:grid-cols-gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .\32xl\:grid-cols-detail {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .group:hover .\32xl\:group-hover\:grid-cols-sidebar {
     grid-template-columns: 2rem auto;
   }
 
+  .group:hover .\32xl\:group-hover\:grid-cols-dictionary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .group:hover .\32xl\:group-hover\:grid-cols-gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .group:hover .\32xl\:group-hover\:grid-cols-detail {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .\32xl\:auto-cols-auto {

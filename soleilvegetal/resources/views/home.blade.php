@@ -25,7 +25,10 @@
     <div class="grid grid-cols-gallery gap-4">
         @foreach ($items as $item)
             <div>
-                <img class="mx-auto" src="{{ asset($item->image->first()->image_source) }}" alt="{{ $item->name }}">
+                <a class="text-linky font-semibold" href="{{ Route('artworks.show', $item->id) }}">
+                    <img class="mx-auto" src="{{ asset($item->image->first()->image_source) }}" alt="{{ $item->name }}">
+                </a>
+                
                 <div class="flex flex-col items-center text-primary">
                     <div>
                         <a class="text-linky font-semibold" href="{{ Route('artworks.show', $item->id) }}">{{ $item->name }}</a> - {{ $item->year }}
