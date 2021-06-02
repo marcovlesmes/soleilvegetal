@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Artwork;
 use App\Models\Autor;
+use App\Models\CartItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArtworkController extends Controller
 {
@@ -16,8 +18,16 @@ class ArtworkController extends Controller
     public function index()
     {
         $autors = Autor::paginate(10);
-        $items = Artwork::paginate(20);
-        return view('home', compact('autors', 'items'));
+        $items = Artwork::where('exposed', '=', true)->paginate(20);
+        $cart = collect([]);
+        if (Auth()->check()) {
+            $cart = CartItem::where('user_id', '=', Auth()->user()->id)->get();
+            $subtotal = $cart->sum(function($item){
+                return $item->artwork->price;
+            });
+            $cart->subtotal = $subtotal;
+        }
+        return view('home', compact('autors', 'items', 'cart'));
     }
 
     /**
@@ -50,7 +60,16 @@ class ArtworkController extends Controller
     public function show($id)
     {
         $item = Artwork::find($id);
-        return view('detail', compact('item'));
+        $cart = collect([]);
+        if (Auth()->check()) {
+            $cart = CartItem::where('user_id', '=', Auth()->user()->id)->get();
+            $subtotal = $cart->sum(function($item){
+                return $item->artwork->price;
+            });
+            $cart->subtotal = $subtotal;
+        }
+
+        return view('detail', compact('item', 'cart'));
     }
 
     /**

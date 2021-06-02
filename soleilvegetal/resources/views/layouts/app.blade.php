@@ -21,6 +21,9 @@
 </head>
 <body class="bg-gray-200">
     @include('widget.sidebar')
+    @if (Auth::check())
+        @include('widget.shoppingcart')
+    @endif
     <a class="block ml-20 mt-5" href="{{ url('/') }}">
         <img class="h-12 w-auto" src="{{ asset('images/soleil-vegetal-logo.png') }}" alt="Soleil Vegetal">
     </a>

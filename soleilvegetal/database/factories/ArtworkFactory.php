@@ -27,7 +27,9 @@ class ArtworkFactory extends Factory
             'format' => $this->faker->randomNumber(2, true) . ' x ' . $this->faker->randomNumber(2, true),
             'edition' => $this->faker->randomNumber(2, true) . ' copias',
             'description' => $this->faker->paragraph(),
-            'price' => $this->faker->numberBetween(5000000, 500000000)
+            'price' => $this->faker->numberBetween(5000000, 500000000),
+            'stock' => $this->faker->numberBetween(1, 10),
+            'exposed' => true
         ];
     }
 }

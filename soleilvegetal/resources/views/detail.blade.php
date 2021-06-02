@@ -2,6 +2,12 @@
 @section('content')
     <div class="grid grid-cols-dictionary gap-y-8 gap-x-16">
         <div class="col-span-2 mb-14">
+            <a class="block mb-6" href="{{ url()->previous() }}">
+                <svg class="h-3 w-3 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+                  </svg>
+                Regresar 
+            </a>
             <h2 class="text-3xl text-primary">Título: {{ $item->name }}</h2>
             <p class="font-medium">{{ $item->year }}</p>
             <p class="font-medium">Autor: {{ $item->autor->first()->name }}</p>
@@ -71,5 +77,20 @@
                 </svg>
             </a>
         </div>
+        @if ($item->stock > 0)
+        <form action="{{ route('cartItems.store') }}" method="post">
+        @csrf
+        <input type="text" class="hidden" name="id" value="{{ $item->id }}">
+        <button class="text-primary text-center font-bold tracking-wider w-1/2 hover:text-secondary" type="submit">Agregar al carrito de compras <svg class="inline h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg></button>
+          @error('id')
+              <small class="w-1/2 block text-center" style="color:red">{{$message}}</small>
+          @enderror
+        </form>
+        @else
+            <span style="color:red">Este articulo no está disponible.</span>
+        @endif
+        
     </div>
 @endsection

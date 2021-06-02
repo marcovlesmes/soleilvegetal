@@ -16,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::resource('autors', \App\Http\Controllers\AutorController::class);
 Route::resource('artworks', \App\Http\Controllers\ArtworkController::class);
+Route::resource('cartItems', \App\Http\Controllers\CardItemController::class);
+Route::post('checkout', [\App\Http\Controllers\CardItemController::class, 'checkout'])->name('checkout');
 Auth::routes();

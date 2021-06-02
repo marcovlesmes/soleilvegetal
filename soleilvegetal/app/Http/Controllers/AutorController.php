@@ -47,7 +47,7 @@ class AutorController extends Controller
     public function show($id)
     {
         $autor = Autor::find($id);
-        $items = $autor->artwork;
+        $items = $autor->artwork->where('exposed', '=', true);
         $autors = Autor::paginate(10);
         return view('home', compact('autors', 'items'));
     }

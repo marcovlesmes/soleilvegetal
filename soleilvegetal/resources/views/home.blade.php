@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex w-3/4 mx-auto">
         <ul class="flex-grow flex items-center">
-            <li><h1 class="text-primary text-3xl mr-24">Obras</h1></li>
+            <li><h1 class="text-primary text-3xl mr-24"><a href="{{ route('artworks.index') }}">Obras</a></h1></li>
             <li class="group uppercase text-primary font-semibold hover:text-secondary hover:bg-gray-200 px-5 text-sm relative"><a href="">Artistas</a>
                 <ul class="absolute hidden group-hover:block bg-gray-200  left-0">
                     @foreach ($autors as $autor)

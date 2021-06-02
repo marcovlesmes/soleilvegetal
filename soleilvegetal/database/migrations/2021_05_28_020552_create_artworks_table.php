@@ -21,6 +21,8 @@ class CreateArtworksTable extends Migration
             $table->string('edition');
             $table->text('description');
             $table->unsignedBigInteger('price');
+            $table->integer('stock');
+            $table->boolean('exposed');
             $table->timestamps();
         });
     }
