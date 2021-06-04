@@ -10,7 +10,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
             d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z" />
     </svg>
-    <div class="grid gap-y-2 group-hover:grid-cols-sidebar">
+    <div x-data="{}" class="grid gap-y-2 group-hover:grid-cols-sidebar">
         <svg class="w-8 h-8 mx-auto" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
             viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
@@ -37,7 +37,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
                     d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
-            <a class="hidden group-hover:flex" href="{{ route('artworks.index') }}">Carro de compras</a>
+            <button @click="$dispatch('toggle')" class="hidden group-hover:flex">Carro de compras</button>
             <svg class="h-7 w-7 text-black border-2 rounded-full p-1" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -85,12 +86,13 @@
                     });
                 }
             };
-        }
+        };
     </script>
 </head>
 
 <body class="bg-gray-200">
     @include('widget.sidebar')
+    @include('widget.shoppingcart')
     <div class="container mx-auto mt-5">
         <nav class="flex justify-evenly items-center">
             <img src="{{ asset('images/soleil-vegetal-logo.png') }}" alt="Soleil Vegetal">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Artwork;
 use App\Models\Autor;
 use App\Models\CartItem;
@@ -33,15 +34,25 @@ class CardItemController extends Controller
         return redirect()->route('artworks.index');
     }
 
-    public function destroy(Request $request) {
-        CartItem::where('id', '=', $request->id)->delete();
+    public function destroy(Request $request, $id) {
+        CartItem::where('id', '=', $request->id)
+                ->where('user_id', '=', $id)
+                ->delete();
         return redirect()->route('artworks.index');
     }
 
     public function checkout(Request $request) {
         // Check what is in the cart
+        $user_id = Auth::user()->id;
+        $items = CartItem::where('user_id', '=', $user_id)->get();
+        $subtotal = $items->sum(function($item){
+            return $item->artwork->price;
+        });
+        $items->subtotal = $subtotal;
+        // Check user address
+        $addresses = Address::where('user_id', '=', $user_id)->get();
         // Create a view
-        dd($request->all());
+        return view('checkout', compact('items', 'addresses'));
     }
 
     public function create_order() {

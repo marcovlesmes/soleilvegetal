@@ -17,5 +17,6 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('i
 Route::resource('autors', \App\Http\Controllers\AutorController::class);
 Route::resource('artworks', \App\Http\Controllers\ArtworkController::class);
 Route::resource('cartItems', \App\Http\Controllers\CardItemController::class);
-Route::post('checkout', [\App\Http\Controllers\CardItemController::class, 'checkout'])->name('checkout');
+Route::resource('addresses', \App\Http\Controllers\AddressController::class);
+Route::get('checkout', [\App\Http\Controllers\CardItemController::class, 'checkout'])->name('checkout');
 Auth::routes();
