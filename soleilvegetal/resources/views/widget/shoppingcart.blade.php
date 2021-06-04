@@ -29,7 +29,7 @@
                 <div>
                     <span>Subtotal</span><span>${{ $cart->subtotal }}</span>
                     <p class="text-center my-3">Gastos de envío y descuentos calculado al momento de pagar</p>
-                    <a class="w-full block text-center bg-gray-400 text-gary-800 py-2 my-2 font-bold" href="{{ route('checkout') }}">Checkout <svg
+                    <a class="block bg-orange-500 text-white py-2 px-6 flex-shrink w-full text-center hover:bg-orange-400 transition-colors" href="{{ route('checkout') }}">Checkout <svg
                             class="inline h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"

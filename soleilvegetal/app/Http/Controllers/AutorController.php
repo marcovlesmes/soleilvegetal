@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Autor;
+use App\Models\CartItem;
 use Illuminate\Http\Request;
 
 class AutorController extends Controller
@@ -49,7 +50,15 @@ class AutorController extends Controller
         $autor = Autor::find($id);
         $items = $autor->artwork->where('exposed', '=', true);
         $autors = Autor::paginate(10);
-        return view('home', compact('autors', 'items'));
+        $cart = collect([]);
+        if (Auth()->check()) {
+            $cart = CartItem::where('user_id', '=', Auth()->user()->id)->get();
+            $subtotal = $cart->sum(function($item){
+                return $item->artwork->price;
+            });
+            $cart->subtotal = $subtotal;
+        }
+        return view('home', compact('autors', 'items', 'cart'));
     }
 
     /**

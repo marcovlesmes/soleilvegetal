@@ -30,9 +30,8 @@ module.exports = {
         'orange500': '#d17732',
       },
       backgroundColor: {
-        'verde100':'#3b7d47',
-        'verde200': '#286b35',
-        'verde300': '#2f6439',
+        'orange-400': '#ffc26c',
+        'orange-500': '#d17732'
       }
     },
     
@@ -43,6 +42,7 @@ module.exports = {
       backgroundColor: ['active'],
       display: ['group-hover'],
       gridTemplateColumns: ['group-hover'],
+      inset: ['group-hover'],
       width: ['hover'],
     },
     

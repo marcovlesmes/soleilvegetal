@@ -17,7 +17,7 @@
                 d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <form class="hidden group-hover:flex" action="" method="POST">
-            <input type="text" class="hidden group-hover:block border w-max-32 mx-2">
+            <input type="text" class="hidden group-hover:block w-max-32 mx-2 appearance-none border-2 border-orange200 leading-tight focus:outline-none focus:bg-white focus:border-orange500 hover:shadow transition duration-500 ease-in-out text-gray">
             <button type="submit">Buscar</button>
         </form>
         @guest

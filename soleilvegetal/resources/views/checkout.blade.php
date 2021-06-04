@@ -64,13 +64,23 @@
         </nav>
         <div class="flex">
             <div class="w-2/3 p-5">
-                <h1 class="text-primary font-bold text-5xl mb-10">Checkout</h1>
+                <a class="block mb-6" href="{{ route('artworks.index') }}">
+                    <svg class="h-3 w-3 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+                    </svg>
+                    Regresar a la tienda
+                </a>
+                <h1 class="text-3xl font-semibold my-6 pb-2 text-center text-primary">Checkout</h1>
                 <h2 class="text-gray-500">Domicilio</h2>
                 @forelse ($addresses as $address)
                     <ul>
                         <li>
-                            <h2 class="text-primary text-lg">{{ $address->street . ' ' . $address->number . '#' . $address->complement }}</h2>
-                            <span class="text-gray-400 text-sm">{{ $address->detail . ' - ' . $address->city . ', ' . $address->state }}</span>
+                            <h2 class="text-primary text-lg">
+                                {{ $address->street . ' ' . $address->number . '#' . $address->complement }}</h2>
+                            <span
+                                class="text-gray-400 text-sm">{{ $address->detail . ' - ' . $address->city . ', ' . $address->state }}</span>
                         </li>
                     </ul>
                 @empty
@@ -79,71 +89,96 @@
                     <form class="grid grid-cols-2 gap-4" method="POST" action="{{ route('addresses.store') }}">
                         @csrf
                         <div class="flex flex-col my-2">
-                            <label for="state">Departamento:</label>
-                            <input class="p-1 @error('state') border border-red-900 @enderror" type="text" name="state" id="state" value="{{ old('state') }}">
+                            <label class="block text-gray-700 text-lg font-medium ml-4 pl-2"
+                                for="state">Departamento:</label>
+                            <input
+                                class="block w-full mt-2 ml-2 p-2 appearance-none border-2 border-orange200 leading-tight focus:outline-none focus:bg-white focus:border-orange500 hover:shadow transition duration-500 ease-in-out text-gray @error('state') border border-red-900 @enderror"
+                                type="text" name="state" id="state" value="{{ old('state') }}">
                             @error('state')
                                 <small class="text-red-900">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="flex flex-col my-2">
-                            <label for="city">Ciudad:</label>
-                            <input class="p-1 @error('city') border border-red-900 @enderror" type="text" name="city" id="city" value="{{ old('city') }}">
+                            <label class="block text-gray-700 text-lg font-medium ml-4 pl-2" for="city">Ciudad:</label>
+                            <input
+                                class="block w-full mt-2 ml-2 p-2 appearance-none border-2 border-orange200 leading-tight focus:outline-none focus:bg-white focus:border-orange500 hover:shadow transition duration-500 ease-in-out text-gray @error('city') border border-red-900 @enderror"
+                                type="text" name="city" id="city" value="{{ old('city') }}">
                             @error('city')
                                 <small class="text-red-900">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="flex flex-col my-2">
-                            <label for="street">Vía:</label>
-                            <input class="p-1 @error('street') border border-red-900 @enderror" type="text" name="street" id="street" value="{{ old('street') }}">
+                            <label class="block text-gray-700 text-lg font-medium ml-4 pl-2" for="street">Vía:</label>
+                            <input
+                                class="block w-full mt-2 ml-2 p-2 appearance-none border-2 border-orange200 leading-tight focus:outline-none focus:bg-white focus:border-orange500 hover:shadow transition duration-500 ease-in-out text-gray @error('street') border border-red-900 @enderror"
+                                type="text" name="street" id="street" value="{{ old('street') }}">
                             @error('street')
                                 <small class="text-red-900">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="flex flex-col my-2">
-                            <label for="number">Número:</label>
-                            <div>
-                                # <input class="p-1 @error('number') border border-red-900 @enderror" type="text" name="number" id="number" value="{{ old('number') }}">
-                                - <input class="p-1 @error('complement') border border-red-900 @enderror" type="text" name="complement" id="complement" value="{{ old('complement') }}">
+                            <label class="block text-gray-700 text-lg font-medium ml-4 pl-2"
+                                for="number">Número:</label>
+                            <div class="flex">
+                                <div class="relative">
+                                    <span class="absolute inset-y-2 left-0 pl-6 text-lg text-gray-300 pt-1 flex items-center">#</span>
+                                    <input
+                                        class="block w-full mt-2 ml-2 p-2 pl-7 appearance-none border-2 border-orange200 leading-tight focus:outline-none focus:bg-white focus:border-orange500 hover:shadow transition duration-500 ease-in-out text-gray @error('number') border border-red-900 @enderror"
+                                        type="text" name="number" id="number" value="{{ old('number') }}">
+                                </div>
+                                <div class="relative ml-10">
+                                    <span class="absolute inset-y-2 left-0 pl-6 text-lg text-gray-300 pt-1 flex items-center">-</span>
+                                    <input
+                                        class="block w-full mt-2 ml-2 p-2 pl-7 appearance-none border-2 border-orange200 leading-tight focus:outline-none focus:bg-white focus:border-orange500 hover:shadow transition duration-500 ease-in-out text-gray @error('complement') border border-red-900 @enderror"
+                                        type="text" name="complement" id="complement"
+                                        value="{{ old('complement') }}">
+                                </div>
+                            </div>
+                            <div class="block">
                                 @error('number')
-                                <small class="text-red-900">{{ $message }}</small>
+                                    <small class="text-red-900">{{ $message }}</small>
                                 @enderror
                                 @error('complement')
-                                <small class="text-red-900">{{ $message }}</small>
+                                    <small class="text-red-900">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
                         <div class="flex flex-col my-2">
-                            <label for="detail">Datos adicionales (opcional):</label>
-                            <input class="p-1 @error('detail') border border-red-900 @enderror" type="text" name="detail" id="detail" value="{{ old('detail') }}">
+                            <label class="block text-gray-700 text-lg font-medium ml-4 pl-2" for="detail">Datos
+                                adicionales (opcional):</label>
+                            <input
+                                class="block w-full mt-2 ml-2 p-2 appearance-none border-2 border-orange200 leading-tight focus:outline-none focus:bg-white focus:border-orange500 hover:shadow transition duration-500 ease-in-out text-gray @error('detail') border border-red-900 @enderror"
+                                type="text" name="detail" id="detail" value="{{ old('detail') }}">
                             @error('detail')
                                 <small class="text-red-900">{{ $message }}</small>
                             @enderror
                         </div>
-                        <button type="submit" class="m-3 bg-green-900 text-white" type="submit">Añadir</button>
+                        <div class="flex flex-col-reverse items-end">
+                            <button type="submit" class="block h-10 bg-orange-500 text-white py-2 px-6 flex-shrink w-1/3 hover:bg-orange-400 transition-colors" type="submit">Añadir</button>
+                        </div>
                     </form>
                 @endforelse
             </div>
             <div class="w-1/3 bg-white h-full p-5 divide-y divide-gray-200">
                 <form method="POST" action="">
-                @foreach ($items as $item)
-                    <div class="grid grid-cols-2 p-5 my-2">
-                        <img class="w-2/3" src="{{ asset($item->artwork->image->first()->image_source) }}"
-                            alt="{{ $item->artwork->name }}">
-                        <ul>
-                            <li class="text-primary">{{ $item->artwork->name }}</li>
-                            <li>
-                                <label for="quantity">Cantidad:</label>
-                                <input class="border" type="number"
-                                    name="quantity" id="quantity" value="{{ $item->quantity }}" min="1"
-                                    max="{{ $item->artwork->stock }}">
-                            </li>
-                            <li>${{ $item->artwork->price }}</li>
-                        </ul>
-                    </div>
-                @endforeach
-                <label for="instructions">Instrucciones de entrega:</label>
-                <textarea name="instructions" id="instructions">{{ old('instructions') }}</textarea>
-                <p>Subtotal: $<span>{{ $items->subtotal }}</span></p>
+                    @foreach ($items as $item)
+                        <div class="grid grid-cols-2 p-5 my-2">
+                            <img class="w-2/3" src="{{ asset($item->artwork->image->first()->image_source) }}"
+                                alt="{{ $item->artwork->name }}">
+                            <ul>
+                                <li class="text-primary">{{ $item->artwork->name }}</li>
+                                <li>
+                                    <label for="quantity">Cantidad:</label>
+                                    <input class="border" type="number" name="quantity" id="quantity"
+                                        value="{{ $item->quantity }}" min="1" max="{{ $item->artwork->stock }}">
+                                </li>
+                                <li>${{ $item->artwork->price }}</li>
+                            </ul>
+                        </div>
+                    @endforeach
+                    <label for="instructions">Instrucciones de entrega:</label>
+                    <textarea name="instructions" id="instructions">{{ old('instructions') }}</textarea>
+                    <p>Subtotal: $<span>{{ $items->subtotal }}</span></p>
                 </form>
             </div>
         </div>
