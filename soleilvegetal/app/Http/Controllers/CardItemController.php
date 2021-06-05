@@ -20,9 +20,7 @@ class CardItemController extends Controller
         }
 
         Validator::make($request->all(), [
-            'id' => Rule::unique('cart_items')->where(function($query) {
-                return $query->where('user_id', '=', Auth()->user()->id);
-            })
+            'id' => 'unique:cart_items,artwork_id,NULL,id,user_id,' . Auth()->user()->id
         ], ['id.unique' => 'Ya existe este articulo en el carro de compras.'])->validate();
         $cartItem = new CartItem();
         $cartItem->artwork_id = $request->id;

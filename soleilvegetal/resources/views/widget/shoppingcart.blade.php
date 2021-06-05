@@ -11,7 +11,7 @@
                 @foreach ($cart as $item)
                     <div id="item-{{ $item->id }}" class="item-cart flex justify-evenly my-5 py-3">
                         <img class="w-2/5 p-3 row-span-2"
-                            src="{{ asset($item->artwork->image->first()->image_source) }}" alt="">
+                            src="{{ asset($item->artwork->image->where('priority', '=', 0)->first()->image_source) }}" alt="">
                         <ul class="mx-3">
                             <li class="text-primary">{{ $item->artwork->name }}</li>
                             <li>${{ $item->artwork->price }}</li>

@@ -26,7 +26,7 @@
         @foreach ($items as $item)
             <div>
                 <a class="text-linky font-semibold" href="{{ Route('artworks.show', $item->id) }}">
-                    <img class="mx-auto" src="{{ asset($item->image->first()->image_source) }}" alt="{{ $item->name }}">
+                    <img class="mx-auto" src="{{ asset($item->image->where('priority', '=', 0)->first()->image_source) }}" alt="{{ $item->name }}">
                 </a>
                 
                 <div class="flex flex-col items-center text-primary">

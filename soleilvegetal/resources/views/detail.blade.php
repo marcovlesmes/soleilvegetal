@@ -2,7 +2,7 @@
 @section('content')
     <div class="grid grid-cols-dictionary gap-y-8 gap-x-16">
         <div class="col-span-2 mb-14">
-            <a class="block mb-6" href="{{ url()->previous() }}">
+            <a class="block mb-6" href="{{ route('artworks.index') }}">
                 <svg class="h-3 w-3 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                   </svg>
@@ -15,10 +15,10 @@
         <div>
             <div class="preview-image mb-6">
                 <img class="max-h-full min-w-full object-cover align-botton"
-                    src="{{ asset($item->image->first()->image_source) }}" alt="{{ $item->name }}">
+                    src="{{ asset($item->image->where('priority', 0)->first()->image_source) }}" alt="{{ $item->name }}">
             </div>
             <ul class="flex flex-wrap">
-                @foreach ($item->image as $image)
+                @foreach ($item->image->sortBy('priority') as $image)
                     <li class="flex-grow-1 h-16">
                         <img class="max-h-full min-w-full object-cover align-botton"
                             src="{{ asset($image->image_source) }}" alt="{{ $item->name }}">

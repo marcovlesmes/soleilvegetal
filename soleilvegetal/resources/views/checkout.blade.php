@@ -163,7 +163,7 @@
                 <form method="POST" action="">
                     @foreach ($items as $item)
                         <div class="grid grid-cols-2 p-5 my-2">
-                            <img class="w-2/3" src="{{ asset($item->artwork->image->first()->image_source) }}"
+                            <img class="w-2/3" src="{{ asset($item->artwork->image->where('priority', '=', 0)->first()->image_source) }}"
                                 alt="{{ $item->artwork->name }}">
                             <ul>
                                 <li class="text-primary">{{ $item->artwork->name }}</li>
