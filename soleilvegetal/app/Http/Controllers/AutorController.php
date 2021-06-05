@@ -45,7 +45,7 @@ class AutorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $autor = Autor::find($id);
         $items = $autor->artwork->where('exposed', '=', true);
@@ -57,6 +57,7 @@ class AutorController extends Controller
                 return $item->artwork->price;
             });
             $cart->subtotal = $subtotal;
+            $cart->open = $request->session()->get('cart-open') ? 'true' : 'false';
         }
         return view('home', compact('autors', 'items', 'cart'));
     }

@@ -1,4 +1,4 @@
-<div x-data="{ isOpen: false }">
+<div x-data="{ isOpen: {{ $cart->open }} }">
     <nav x-show="isOpen" x-on:toggle.window="isOpen = !isOpen"
         class=" group fixed right-0 top-0 bg-white h-full flex flex-col max-w-sm items-center z-50 p-3 overflow-y-scroll">
         <div class="flex w-full justify-between">

@@ -15,7 +15,7 @@ class ArtworkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $autors = Autor::paginate(10);
         $items = Artwork::where('exposed', '=', true)->paginate(20);
@@ -26,6 +26,7 @@ class ArtworkController extends Controller
                 return $item->artwork->price;
             });
             $cart->subtotal = $subtotal;
+            $cart->open = $request->session()->get('cart-open') ? 'true' : 'false';
         }
         return view('home', compact('autors', 'items', 'cart'));
     }
@@ -57,7 +58,7 @@ class ArtworkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $item = Artwork::find($id);
         $cart = collect([]);
@@ -67,6 +68,7 @@ class ArtworkController extends Controller
                 return $item->artwork->price;
             });
             $cart->subtotal = $subtotal;
+            $cart->open = $request->session()->get('cart-open') ? 'true' : 'false';
         }
 
         return view('detail', compact('item', 'cart'));

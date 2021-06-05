@@ -29,6 +29,7 @@ class CardItemController extends Controller
         $cartItem->created_at = Carbon::now();
         $cartItem->save();
 
+        $request->session()->put('cart-open', true);
         return redirect()->route('artworks.index');
     }
 
@@ -36,6 +37,7 @@ class CardItemController extends Controller
         CartItem::where('id', '=', $request->id)
                 ->where('user_id', '=', $id)
                 ->delete();
+        $request->session()->put('cart-open', false);
         return redirect()->route('artworks.index');
     }
 
