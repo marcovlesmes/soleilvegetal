@@ -20,6 +20,7 @@ class ArtworkController extends Controller
         $autors = Autor::paginate(10);
         $items = Artwork::where('exposed', '=', true)->paginate(20);
         $cart = collect([]);
+        $cart->open = 'false';
         if (Auth()->check()) {
             $cart = CartItem::where('user_id', '=', Auth()->user()->id)->get();
             $subtotal = $cart->sum(function($item){
@@ -62,6 +63,7 @@ class ArtworkController extends Controller
     {
         $item = Artwork::find($id);
         $cart = collect([]);
+        $cart->open = 'false';
         if (Auth()->check()) {
             $cart = CartItem::where('user_id', '=', Auth()->user()->id)->get();
             $subtotal = $cart->sum(function($item){

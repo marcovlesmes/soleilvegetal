@@ -23,17 +23,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $items = DB::table('carousel')->where('active', '=', true)->get();
         $autors = DB::table('autors')->paginate(10);
         $cart = collect([]);
+        $cart->open = 'false';
         if (Auth()->check()) {
             $cart = CartItem::where('user_id', '=', Auth()->user()->id)->get();
             $subtotal = $cart->sum(function($item){
                 return $item->artwork->price;
             });
             $cart->subtotal = $subtotal;
+            $cart->open = $request->session()->get('cart-open') ? 'true' : 'false';
         }
         return view('welcome', compact('autors', 'items', 'cart'));
     }
