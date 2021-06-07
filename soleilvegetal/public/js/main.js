@@ -22,3 +22,21 @@ window.cardItem = function () {
         }
     }
 }
+
+window.imageSwitcher = function () {
+    return {
+        mainContainer: null,
+        init() {
+            this.mainContainer = this.$refs.mainContainer;
+            console.log(this.mainContainer);
+        },
+        swapImage(id) {
+            thumb = document.getElementById('thumb-' + id);
+            image = document.createElement('img');
+            image.src = thumb.src;
+            image.setAttribute('class','max-h-full min-w-full object-cover align-botton');
+            this.mainContainer.innerHTML = '';
+            this.mainContainer.appendChild(image);
+        }
+    }
+}

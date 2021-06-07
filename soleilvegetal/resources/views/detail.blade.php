@@ -12,15 +12,15 @@
             <p class="font-medium">{{ $item->year }}</p>
             <p class="font-medium">Autor: {{ $item->autor->first()->name }}</p>
         </div>
-        <div>
-            <div class="preview-image mb-6">
+        <div x-data="imageSwitcher()" x-init="init()">
+            <div x-ref="mainContainer" class="preview-image mb-6">
                 <img class="max-h-full min-w-full object-cover align-botton"
                     src="{{ asset($item->image->where('priority', 0)->first()->image_source) }}" alt="{{ $item->name }}">
             </div>
             <ul class="flex flex-wrap">
                 @foreach ($item->image->sortBy('priority') as $image)
                     <li class="flex-grow-1 h-16">
-                        <img class="max-h-full min-w-full object-cover align-botton"
+                        <img @click="swapImage({{ $image->id }})" id="thumb-{{ $image->id }}" class="max-h-full min-w-full object-cover align-botton cursor-pointer"
                             src="{{ asset($image->image_source) }}" alt="{{ $item->name }}">
                     </li>
                 @endforeach
