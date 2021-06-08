@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Bogota',
 
     /*
     |--------------------------------------------------------------------------
@@ -229,6 +229,12 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+    ],
+
+    'payu' => [
+        'merchant' => env('PAYU_MERCHANTID'),
+        'account' => env('PAYU_ACCOUNTID'),
+        'apikey' => env('PAYU_APIKEY'),
     ],
 
 ];

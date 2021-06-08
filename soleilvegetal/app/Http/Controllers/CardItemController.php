@@ -9,11 +9,36 @@ use App\Models\CartItem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class CardItemController extends Controller
 {
+    private function createOrder($items) {
+        $items_id = $items->map(function ($item) {
+            return $item['id'];
+        });
+        $referenceCode = 'U' . Auth()->user()->id . 'D' . Carbon::now()->format('YmdHis') . 'I' . $items_id->implode('I');
+        $signature = md5(config('apikey') . '~' . config('merchant') . '~' . $referenceCode . '~' . $items->subtotal . '~COP');
+        
+        $order = collect([]);
+        $order->put('merchantId', config('app.payu.merchant'))
+              ->put('accountId', config('app.payu.account'))
+              ->put('description', 'Pago en tienda virtual')
+              ->put('referenceCode', $referenceCode)
+              ->put('amount', $items->subtotal)
+              ->put('tax', 0)
+              ->put('taxReturnBase', 0)
+              ->put('currency', 'COP')
+              ->put('signature', $signature)
+              ->put('test', '0')
+              ->put('buyerEmail', Auth()->user()->email)
+              ->put('responseUrl', route('confirmation'))
+              ->put('confirmationUrl', route('response'));
+        return $order;
+    }
+
     public function store(Request $request) {
         if (!Auth()->check()) {
             return redirect()->route('login');
@@ -51,13 +76,17 @@ class CardItemController extends Controller
         $items->subtotal = $subtotal;
         // Check user address
         $addresses = Address::where('user_id', '=', $user_id)->get();
-        // Create a view
-        return view('checkout', compact('items', 'addresses'));
+        // Create order
+        $order = $this->createOrder($items);
+        return view('checkout', compact('items', 'addresses', 'order'));
     }
 
-    public function create_order() {
-        // Create order
-        // PayU integration
+    public function payuConfirmation(Request $request) {
+        return view('confirmation');
+    }
+
+    public function payuResponse(Request $request) {
+        // save response
         // Clean cart
     }
 }

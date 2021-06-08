@@ -76,11 +76,13 @@
                 <h2 class="text-gray-500">Domicilio</h2>
                 @forelse ($addresses as $address)
                     <ul>
-                        <li>
+                        <li class="bg-white w-full p-3 my-5">
                             <h2 class="text-primary text-lg">
                                 {{ $address->street . ' ' . $address->number . '#' . $address->complement }}</h2>
                             <span
-                                class="text-gray-400 text-sm">{{ $address->detail . ' - ' . $address->city . ', ' . $address->state }}</span>
+                                class="text-gray-400 text-sm">{{ $address->detail . ' - ' . $address->city . ', ' . $address->state }}
+                            </span>
+                            <a class="block text-linky" href="#">Modificar</a>
                         </li>
                     </ul>
                 @empty
@@ -158,6 +160,15 @@
                         </div>
                     </form>
                 @endforelse
+                @if ($addresses->count() > 0)
+                    <h2 class="text-gray-500">Modo de pago</h2>
+                    <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+                        @foreach ($order as $key => $value)
+                        <input name="{{ $key }}" type="hidden" value="{{ $value }}">    
+                        @endforeach
+                        <input class="text-white font-semibold p-3 rounded-sm cursor-pointer" style="background-color: #A6C307" name="Submit" type="submit" value="PayU">
+                    </form>
+                @endif
             </div>
             <div class="w-1/3 bg-white h-full p-5 divide-y divide-gray-200">
                 <form method="POST" action="">
