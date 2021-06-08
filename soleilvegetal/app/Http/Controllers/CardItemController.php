@@ -15,13 +15,14 @@ use Illuminate\Validation\Rule;
 
 class CardItemController extends Controller
 {
-    private function createOrder($items) {
+    private function createOrder($items, $addresses) {
         $items_id = $items->map(function ($item) {
             return $item['id'];
         });
         $referenceCode = 'U' . Auth()->user()->id . 'D' . Carbon::now()->format('YmdHis') . 'I' . $items_id->implode('I');
         $signature = md5(config('apikey') . '~' . config('merchant') . '~' . $referenceCode . '~' . $items->subtotal . '~COP');
-        
+        $address = $addresses->first();
+
         $order = collect([]);
         $order->put('merchantId', config('app.payu.merchant'))
               ->put('accountId', config('app.payu.account'))
@@ -33,9 +34,14 @@ class CardItemController extends Controller
               ->put('currency', 'COP')
               ->put('signature', $signature)
               ->put('test', '0')
+              ->put('buyerFullName', Auth()->user()->name)
               ->put('buyerEmail', Auth()->user()->email)
               ->put('responseUrl', route('confirmation'))
-              ->put('confirmationUrl', route('response'));
+              ->put('confirmationUrl', route('response'))
+              ->put('shippingAddress', $address->street . ' ' . $address->number . '#' . $address->complement)
+              ->put('shippingCity', $address->city)
+              ->put('shippingCountry', 'Colombia')
+              ->put('telephone', '0000000');
         return $order;
     }
 
@@ -77,7 +83,7 @@ class CardItemController extends Controller
         // Check user address
         $addresses = Address::where('user_id', '=', $user_id)->get();
         // Create order
-        $order = $this->createOrder($items);
+        $order = $this->createOrder($items, $addresses);
         return view('checkout', compact('items', 'addresses', 'order'));
     }
 
