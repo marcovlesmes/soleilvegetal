@@ -83,7 +83,10 @@ class CardItemController extends Controller
         // Check user address
         $addresses = Address::where('user_id', '=', $user_id)->get();
         // Create order
-        $order = $this->createOrder($items, $addresses);
+        $order = null;
+        if ($addresses->count() > 0) {
+            $order = $this->createOrder($items, $addresses);
+        }
         return view('checkout', compact('items', 'addresses', 'order'));
     }
 
