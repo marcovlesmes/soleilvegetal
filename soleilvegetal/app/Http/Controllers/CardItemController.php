@@ -20,7 +20,7 @@ class CardItemController extends Controller
             return $item['id'];
         });
         $referenceCode = 'U' . Auth()->user()->id . 'D' . Carbon::now()->format('YmdHis') . 'I' . $items_id->implode('I');
-        $signature = md5(config('apikey') . '~' . config('merchant') . '~' . $referenceCode . '~' . $items->subtotal . '~COP');
+        $signature = md5(config('app.payu.apikey') . '~' . config('app.payu.merchant') . '~' . $referenceCode . '~' . $items->subtotal . '~COP');
         $address = $addresses->first();
 
         $order = collect([]);
@@ -41,7 +41,7 @@ class CardItemController extends Controller
               ->put('shippingAddress', $address->street . ' ' . $address->number . '#' . $address->complement)
               ->put('shippingCity', $address->city)
               ->put('shippingCountry', 'Colombia')
-              ->put('telephone', '0000000');
+              ->put('telephone', '3192901753');
         return $order;
     }
 

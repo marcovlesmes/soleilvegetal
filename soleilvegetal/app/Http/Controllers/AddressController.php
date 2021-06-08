@@ -16,7 +16,7 @@ class AddressController extends Controller
             'street' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
             'number' => 'required|alpha_num',
             'complement'=> 'required|numeric',
-            'detail' => 'regex:/^[a-zA-Z0-9\s.#()-]+$/'
+            'detail' => 'regex:/^[a-zA-Z0-9\s.#()- ]+$/'
         ])->validate();
 
         $address = new Address();
