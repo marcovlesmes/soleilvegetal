@@ -109,4 +109,10 @@ class ArtworkController extends Controller
     {
         //
     }
+
+    public function list() {
+        $title = 'Obras';
+        $items = Artwork::paginate(20);
+        return view('admin.artworks.list', compact('title', 'items'));
+    }
 }
