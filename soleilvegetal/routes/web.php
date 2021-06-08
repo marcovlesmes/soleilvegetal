@@ -25,9 +25,9 @@ Route::prefix('payu')->group(function() {
 });
 Route::prefix('dashboard')->middleware('auth')->group(function() {
     Route::get('/', [\App\Http\Controllers\CarouselController::class, 'index'])->name('dashboard');
-    Route::resource('carousel', \App\Http\Controllers\CarouselController::class);
+    Route::resource('carousel', \App\Http\Controllers\CarouselController::class)->except(['index']);
     Route::get('artworks', [\App\Http\Controllers\ArtworkController::class, 'list'])->name('artworks.list');
-    Route::get('artworks/{id}', [\App\Http\Controllers\ArtworkController::class, 'detail'])->name('artworks.detail');
+    Route::resource('artworks', \App\Http\Controllers\ArtworkController::class)->except(['index', 'show']);
     Route::resource('orders', \App\Http\Controllers\OrderController::class);
 });
 Auth::routes();

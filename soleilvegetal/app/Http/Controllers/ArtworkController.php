@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Artwork;
 use App\Models\Autor;
 use App\Models\CartItem;
+use App\Models\Technique;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,7 +40,10 @@ class ArtworkController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Nueva Obra';
+        $artists = Autor::get();
+        $techniques = Technique::get();
+        return view('admin.artworks.detail', compact('title', 'artists', 'techniques'));
     }
 
     /**
@@ -84,7 +88,10 @@ class ArtworkController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Nueva Obra';
+        $artists = Autor::get();
+        $techniques = Technique::get();
+        return view('admin.artworks.detail', compact('title', 'artists', 'techniques'));
     }
 
     /**
