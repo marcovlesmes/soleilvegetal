@@ -98,6 +98,7 @@ class CarouselController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
+        Carousel::where('id', $id)->delete();
+        return redirect()->route('dashboard');
     }
 }
