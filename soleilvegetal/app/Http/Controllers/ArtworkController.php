@@ -43,7 +43,9 @@ class ArtworkController extends Controller
         $title = 'Nueva Obra';
         $artists = Autor::get();
         $techniques = Technique::get();
-        return view('admin.artworks.detail', compact('title', 'artists', 'techniques'));
+        $item = new Artwork();
+        $next = collect(['action' => route('artworks.store'), 'method' => 'POST']);
+        return view('admin.artworks.create', compact('title', 'artists', 'techniques', 'item', 'next'));
     }
 
     /**
@@ -91,7 +93,9 @@ class ArtworkController extends Controller
         $title = 'Nueva Obra';
         $artists = Autor::get();
         $techniques = Technique::get();
-        return view('admin.artworks.detail', compact('title', 'artists', 'techniques'));
+        $item = Artwork::find($id);
+        $next = collect(['action' => route('artworks.update', $id), 'method' => 'PUT/PATCH']);
+        return view('admin.artworks.create', compact('title', 'artists', 'techniques', 'item', 'next'));
     }
 
     /**
