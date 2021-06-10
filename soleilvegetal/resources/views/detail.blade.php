@@ -14,8 +14,12 @@
         </div>
         <div x-data="imageSwitcher()" x-init="init()">
             <div x-ref="mainContainer" class="preview-image mb-6">
+                @if ($item->image->isEmpty())
+                    <img class="max-h-full min-w-full object-cover align-botton" src="{{ asset('images/no-image.png') }}" alt="No image avalible">
+                @else
                 <img class="max-h-full min-w-full object-cover align-botton"
-                    src="{{ asset($item->image->where('priority', 0)->first()->image_source) }}" alt="{{ $item->name }}">
+                src="{{ asset($item->image->where('priority', 0)->first()->image_source) }}" alt="{{ $item->name }}">
+                @endif
             </div>
             <ul class="flex flex-wrap">
                 @foreach ($item->image->sortBy('priority') as $image)

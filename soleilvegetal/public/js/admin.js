@@ -49,3 +49,39 @@ window.listedItems = function () {
         }
     }
 }
+
+window.modelManager = function () {
+    return {
+        dataForm: null,
+        init: function () {
+            this.dataForm = this.$refs.dataForm;
+            this.update();
+        },
+        update: function () {
+            let selectFields = document.querySelectorAll('select')
+            for (let i = 0; i < selectFields.length; i++) {
+                this.setSelectField(selectFields[i]);
+            }
+        },
+        checkOption: function (e) {
+            let field = e.target;
+            this.setSelectField(field);
+        },
+        save: function () {
+            this.dataForm.submit();
+        },
+        setSelectField: function (field) {
+            let label = field.nextElementSibling.querySelector('label');
+            let input = field.nextElementSibling.querySelector('input');
+            if (field.value == 'new') {
+                label.classList.remove('text-gray-300');
+                input.classList.remove('text-gray-400');
+                input.disabled = false;
+            } else {
+                label.classList.add('text-gray-300');
+                input.classList.add('text-gray-400');
+                input.disabled = true;
+            }
+        }
+    }
+}

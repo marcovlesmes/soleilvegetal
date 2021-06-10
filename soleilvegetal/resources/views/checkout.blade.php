@@ -162,7 +162,7 @@
                 @endforelse
                 @if ($addresses->count() > 0)
                     <h2 class="text-gray-500">Modo de pago</h2>
-                    <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+                    <form method="post" action="{{ env('PAYU_URL') }}">
                         @foreach ($order as $key => $value)
                         <input name="{{ $key }}" type="hidden" value="{{ $value }}">    
                         @endforeach
