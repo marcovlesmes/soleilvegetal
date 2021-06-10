@@ -101,4 +101,17 @@ class CarouselController extends Controller
         Carousel::where('id', $id)->delete();
         return redirect()->route('dashboard');
     }
+
+    public function set(Request $request) {
+        $items = Carousel::get();
+        $values = json_decode($request->status);
+        foreach ($values as $key => $value) {
+            if ($items->where('id', $key)->first()->active != ($value == 1)) {
+                $items->where('id', $key)->first()->active = $value;
+                $items->where('id', $key)->first()->save();
+            }
+        }
+        
+        return redirect()->route('dashboard');
+    }
 }
