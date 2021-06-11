@@ -20,8 +20,10 @@
     </nav>
     <div x-data="listedItems()" x-init="init()" class="flex">
         @forelse ($items as $item)
-        <div class="flex p-2 bg-white m-5">
+        
+        <div class="flex flex-col p-2 bg-white m-5">
             <img class="w-auto h-32" src="{{ asset($item->image_source) }}" alt="{{ $item->name }}">
+            <div class="">
             <label for="checkbox-{{ $item->id }}">Visible</label>
             <input type="checkbox" name="active" id="checkbox-{{ $item->id }}" @if ($item->active) checked @endif>
             <button @click="destroy({{ $item->id }})">
@@ -34,6 +36,9 @@
                     <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                 </svg>
             </button>
+            
+            </div>
+            
         </div>
         @empty
         <p class="text-center">No hay imagenes cargadas.</p>
