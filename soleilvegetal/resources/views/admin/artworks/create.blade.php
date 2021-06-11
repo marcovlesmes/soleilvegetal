@@ -15,7 +15,7 @@
                         d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                 </svg></button>
         </nav>
-        <form x-ref="dataForm" class="grid grid-cols-3 gap-4 my-5" action="{{ $next->get('action') }}" method="POST">
+        <form x-ref="dataForm" class="grid grid-cols-3 gap-4 my-5" action="{{ $next->get('action') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method($next->get('method'))
             <div class="flex flex-col border border-white p-2 rounded-sm">
@@ -28,13 +28,13 @@
                         <option value="null">No hay autores creados.</option>
                     @endforelse
                 </select>
-                @error('autor')
+                <div class="py-3 flex flex-col">
+                    <label class="pl-3 pb-1 font-semibold" for="new_autor">Nuevo Autor</label>
+                    <input class="p-2" type="text" name="new_autor" id="new_autor">
+                </div>
+                @error('new_autor')
                     <small class="text-red-600">{{ $message }}</small>
                 @enderror
-                <div class="py-3 flex flex-col">
-                    <label class="pl-3 pb-1 font-semibold" for="new_artist">Nuevo Autor</label>
-                    <input class="p-2" type="text" name="new_artist" id="new_artist">
-                </div>
             </div>
             <div class="flex flex-col border border-white p-2 rounded-sm">
                 <label class="pl-3 pb-1 font-semibold" for="name">Titulo</label>
@@ -67,13 +67,13 @@
                         <option value="null">No hay técnicas creadas</option>
                     @endforelse
                 </select>
-                @error('technique')
-                    <small class="text-red-600">{{ $message }}</small>
-                @enderror
                 <div class="py-3 flex flex-col">
                     <label class="pl-3 pb-1 font-semibold" for="new_technique">Nueva Técnica</label>
                     <input class="p-2" type="text" name="new_technique" id="new_technique">
                 </div>
+                @error('new_technique')
+                    <small class="text-red-600">{{ $message }}</small>
+                @enderror
             </div>
             <div class="flex flex-col border border-white p-2 rounded-sm">
                 <label class="pl-3 pb-1 font-semibold" for="edition">Edición</label>
@@ -110,10 +110,27 @@
                     <small class="text-red-600">{{ $message }}</small>
                 @enderror
             </div>
+            <div class="flex flex-col border border-white p-2 rounded-sm">
+                <label class="pl-3 pb-1 font-semibold" for="images">Imágenes</label>
+                <input type="file" name="imageFile[]" class="" id="images" multiple="multiple" accept="image/png, image/jpeg">
+            </div>
+            <input x-ref="deleteImagesInput" type="hidden" name="deleteImages">
         </form>
-        <div class="flex">
+        <div x-ref="picturesContainer" class="flex my-5">
             @forelse ($item->image as $image)
-                <div class="flex-shrink">
+                <div id="picture-{{$image->id}}" class="flex-shrink relative">
+                    <div class="absolute right-0 top-0 m-2">
+                        <button @click="deletePicture({{ $image->id }})">
+                            <svg class="h-6 w-6 text-gray-500 hover:text-red-600 transform  hover:scale-110  cursor-pointer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" />
+                              <line x1="4" y1="7" x2="20" y2="7" />
+                              <line x1="10" y1="11" x2="10" y2="17" />
+                              <line x1="14" y1="11" x2="14" y2="17" />
+                              <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                              <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                            </svg>
+                        </button>
+                    </div>
                     <img src="{{ asset($image->image_source) }}" alt="{{ $image->name }}">
                 </div>
             @empty

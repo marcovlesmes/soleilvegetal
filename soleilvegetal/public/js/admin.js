@@ -53,8 +53,14 @@ window.listedItems = function () {
 window.modelManager = function () {
     return {
         dataForm: null,
+        picturesContainer: null,
+        deleteImagesInput: null,
+        initPictureList: null,
         init: function () {
             this.dataForm = this.$refs.dataForm;
+            this.picturesContainer = this.$refs.picturesContainer;
+            this.deleteImagesInput = this.$refs.deleteImagesInput;
+            this.initPictureList = this.getPictureList();
             this.update();
         },
         update: function () {
@@ -67,7 +73,26 @@ window.modelManager = function () {
             let field = e.target;
             this.setSelectField(field);
         },
+        deletePicture: function (id) {
+            this.picturesContainer.querySelector('#picture-' + id).remove();
+        },
+        diffPictures: function () {
+            let initPicturesList = JSON.parse(this.initPictureList);
+            let actualPicturesList = JSON.parse(this.getPictureList());
+            return JSON.stringify(initPicturesList.filter(x => !actualPicturesList.includes(x)));
+        },
+        getPictureList() {
+            let imgDivs = this.picturesContainer.childNodes;
+            let ids = [];
+            imgDivs.forEach((div) => {
+                if (div.id) {
+                    ids.push(div.id.replace('picture-', ''));
+                }
+            });
+            return JSON.stringify(ids);
+        },
         save: function () {
+            this.deleteImagesInput.value = this.diffPictures();
             this.dataForm.submit();
         },
         setSelectField: function (field) {
