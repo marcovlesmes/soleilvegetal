@@ -10,6 +10,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg></a>
     </nav>
+<div x-data="listedItems()" x-init="init()">
     <div class="bg-white w-10/12 border-2 border-green-500 mx-auto mb-4">
         <table class="table-auto w-full  text-gray-600 bg-green-300 ">
             <thead>
@@ -42,7 +43,7 @@
                         </td>
                         <td>
                             <div class="flex justify-around">
-                                <a href="{{ route('artworks.destroy', $item->id) }}">
+                                <button @click="destroy({{ $item->id }})">
                                     <svg class="h-6 w-6 text-gray-500 hover:text-red-600 transform  hover:scale-110  cursor-pointer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                       <path stroke="none" d="M0 0h24v24H0z" />
                                       <line x1="4" y1="7" x2="20" y2="7" />
@@ -51,7 +52,7 @@
                                       <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
                                       <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                                     </svg>
-                                </a>
+                                </button>
                                 <a href="{{ route('artworks.edit', $item->id) }}">
                                     <svg class="h-6 w-6 text-gray-500  hover:text-blue-600 transform  hover:scale-110  cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -72,5 +73,10 @@
             </tbody>
         </table>
     </div>
+    <form x-ref="destroyForm" action="{{ route('artworks.destroy', 0) }}" method="post">
+    @csrf
+    @method('DELETE')
+    </form>
+</div>
     {{ $items->links() }}
 @endsection

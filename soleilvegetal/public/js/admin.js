@@ -10,16 +10,18 @@ window.listedItems = function () {
         init: function () {
             this.itemsContainer = this.$refs.itemsContainer;
             this.saveListBtn = this.$refs.saveListBtn;
-            this.itemsContainer.childNodes.forEach(element => {
-                if (element.childElementCount > 0) {
-                    this.checkInputs.push(element.querySelector('input[type=checkbox]'));
-                }
-            });
-            this.initCheckValues = this.getCheckValues();
+            if (this.itemsContainer) {
+                this.itemsContainer.childNodes.forEach(element => {
+                    if (element.childElementCount > 0) {
+                        this.checkInputs.push(element.querySelector('input[type=checkbox]'));
+                    }
+                });
+                this.initCheckValues = this.getCheckValues();
+                this.checkChanges();
+            }
             this.setForm = this.$refs.setForm;
             this.destroyForm = this.$refs.destroyForm;
             this.destroyUrl = this.destroyForm.action.slice(0, -1);
-            this.checkChanges();
         },
         checkChanges: function () {
             let actuallyState = this.getCheckValues();
@@ -54,11 +56,13 @@ window.modelManager = function () {
     return {
         dataForm: null,
         picturesContainer: null,
+        deleteArtworkForm: null,
         deleteImagesInput: null,
         initPictureList: null,
         init: function () {
             this.dataForm = this.$refs.dataForm;
             this.picturesContainer = this.$refs.picturesContainer;
+            this.deleteArtworkForm = this.$refs.deleteArtworkForm;
             this.deleteImagesInput = this.$refs.deleteImagesInput;
             this.initPictureList = this.getPictureList();
             this.update();

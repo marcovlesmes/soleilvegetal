@@ -254,7 +254,13 @@ class ArtworkController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
+        $images = Image::where('artwork_id', $id)->get();
+            foreach ($images as $image) {
+                Storage::disk('public')->delete($image->image_source);
+                $image->delete();
+            }
+        Artwork::find($id)->delete();
+        return back()->with('success', 'La obra ha sido eliminada correctamente.');
     }
 
     public function list() {
