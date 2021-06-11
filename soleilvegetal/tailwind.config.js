@@ -39,7 +39,8 @@ module.exports = {
   variants: {
     extend: {
       alignItems: ['hover'],
-      backgroundColor: ['active'],
+      backgroundColor: ['active', 'disabled'],
+      cursor: ['disabled'],
       display: ['group-hover'],
       gridTemplateColumns: ['group-hover'],
       inset: ['group-hover'],
