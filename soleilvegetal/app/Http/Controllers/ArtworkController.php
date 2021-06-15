@@ -63,6 +63,7 @@ class ArtworkController extends Controller
      */
     public function store(Request $request)
     {
+        /*
         Validator::make($request->all(), [
             'autor' => 'required|alpha_num',
             'name' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
@@ -76,6 +77,20 @@ class ArtworkController extends Controller
             'price' => 'required|numeric',
             'stock' => 'required|numeric',
             'deleteImages' => 'required|regex:/^[0-9\[\]]+$/'
+        ])->validate();*/
+        Validator::make($request->all(), [
+            'autor' => 'required',
+            'name' => 'required',
+            'new_autor' => 'requiredIf:name,new',
+            'year' => 'required',
+            'format' => 'required',
+            'technique' => 'required',
+            'new_technique' => 'requiredIf:technique,new',
+            'edition' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric',
+            'deleteImages' => 'required'
         ])->validate();
 
         $autor_id = $request->autor;
