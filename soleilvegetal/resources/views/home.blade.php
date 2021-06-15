@@ -26,7 +26,11 @@
         @foreach ($items as $item)
             <div>
                 <a class="text-linky font-semibold" href="{{ Route('artworks.show', $item->id) }}">
-                    <img class="mx-auto" src="{{ asset($item->image->where('priority', '=', 0)->first()->image_source) }}" alt="{{ $item->name }}">
+                    @if ($item->image->isEmpty())
+                    <img class="mx-auto" src="{{ asset('images/no-image.png') }}" alt="No image avalible">
+                    @else
+                    <img class="mx-auto" src="{{ asset($item->image->sortBy('priority')->first()->image_source) }}" alt="{{ $item->name }}">
+                    @endif
                 </a>
                 
                 <div class="flex flex-col items-center text-primary">

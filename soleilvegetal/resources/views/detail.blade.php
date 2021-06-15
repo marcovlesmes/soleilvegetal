@@ -18,7 +18,7 @@
                     <img class="max-h-full min-w-full object-cover align-botton" src="{{ asset('images/no-image.png') }}" alt="No image avalible">
                 @else
                 <img class="max-h-full min-w-full object-cover align-botton"
-                src="{{ asset($item->image->where('priority', 0)->first()->image_source) }}" alt="{{ $item->name }}">
+                src="{{ asset($item->image->sortBy('priority')->first()->image_source) }}" alt="{{ $item->name }}">
                 @endif
             </div>
             <ul class="flex flex-wrap">
