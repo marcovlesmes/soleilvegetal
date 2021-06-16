@@ -29,7 +29,7 @@
                     @if ($item->image->isEmpty())
                     <img class="mx-auto" src="{{ asset('images/no-image.png') }}" alt="No image avalible">
                     @else
-                    <img class="mx-auto" src="{{ asset($item->image->sortBy('priority')->first()->image_source) }}" alt="{{ $item->name }}">
+                    <img class="mx-auto max-h-52" src="{{ asset($item->image->sortBy('priority')->first()->image_source) }}" alt="{{ $item->name }}">
                     @endif
                 </a>
                 

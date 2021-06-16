@@ -11,7 +11,6 @@ window.cardItem = function () {
             this.deleteForm = this.$refs.deleteForm;
             this.deleteInput = document.getElementById('delete-input');
             this.count = document.getElementsByClassName('item-cart').length;
-            console.log(this.deleteForm);
         },
         destroy(id) {
             this.count--;
@@ -28,7 +27,6 @@ window.imageSwitcher = function () {
         mainContainer: null,
         init() {
             this.mainContainer = this.$refs.mainContainer;
-            console.log(this.mainContainer);
         },
         swapImage(id) {
             thumb = document.getElementById('thumb-' + id);

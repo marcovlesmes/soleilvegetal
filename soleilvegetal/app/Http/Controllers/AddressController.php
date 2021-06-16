@@ -11,12 +11,11 @@ class AddressController extends Controller
 {
     public function store(Request $request) {
         Validator::make($request->all(), [
-            'state' => 'required|regex:/^[a-zA-Z\s]+$/',
-            'city' => 'required|regex:/^[a-zA-Z\s]+$/',
-            'street' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
+            'state' => 'required',
+            'city' => 'required',
+            'street' => 'required',
             'number' => 'required|alpha_num',
-            'complement'=> 'required|numeric',
-            'detail' => 'nullable|regex:/^[a-zA-Z0-9\s.#()-]+$/'
+            'complement'=> 'required|numeric'
         ])->validate();
 
         $address = new Address();
