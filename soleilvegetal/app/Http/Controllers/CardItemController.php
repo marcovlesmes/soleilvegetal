@@ -155,18 +155,42 @@ class CardItemController extends Controller
         $transaction->travel_agency_authorization_code = $request->travel_agency_authorization_code; // Código de autorización de la agencia de viajes
         $transaction->value = $request->value; // Es el monto total de la transacción. Puede contener dos dígitos decimales. Ej. 10000.00 ó 10000
         $transaction->save();
-        // save response
+
         $buyItItems = $this->decodeReferenceSaleCode($request->reference_sale);
-        // Clean cart
-        foreach($reference_code as $item) {
-            CartItem::where('user_id', $item->user)->where('artwork_id', $item->id)->delete();
+        foreach($buyItItems->items_id as $item) {
+            CartItem::where('user_id', $buyItItems->user_id)->where('artwork_id', $item->id)->delete();
         }
 
         return response()->json(['success' => 'success'], 200);
     }
 
     private function decodeReferenceSaleCode($reference_code) {
-            $buyItItems = new stdClass();
-            
+        $a = [];
+        preg_match('/(^U\d+)(D\d+)([I\d]+)/', $reference_code, $a);
+        $user = trim($a[1], 'U');
+        $date = trim($a[2], 'D');
+        $items_id = [];
+        $id = null;
+        foreach ($code = str_split($reference_code) as $index => $caracter) {
+            if ($caracter == 'I') {
+                if ($id != null) {
+                    array_push($items_id, $id);
+                }
+                $id = '';
+            } elseif (gettype($id) == 'string') {
+                $id .= $caracter;
+            }
+            if ($index == count($code) - 1) {
+                array_push($items_id, $id);
+            }
+        }
+
+        $items = collect([
+            'user_id' => $user,
+            'date' => $date,
+            'items_id' => collect($items_id)
+        ]);
+        
+        return $items;
     }
 }
