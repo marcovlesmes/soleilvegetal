@@ -23,7 +23,7 @@
         <span class="text-secondary">Filtrar por:</span> <a href="#">Artista</a> <a href="#">Técnica</a>
     </div>
     <div class="grid grid-cols-gallery gap-4">
-        @foreach ($items as $item)
+        @forelse ($items as $item)
             <div>
                 <a class="text-linky font-semibold" href="{{ Route('artworks.show', $item->id) }}">
                     @if ($item->image->isEmpty())
@@ -47,7 +47,9 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <p>No se encontraron obras.</p>
+        @endforelse
     </div>
     @if (isset($items->links))
         {{ $items->links() }}

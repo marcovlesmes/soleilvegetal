@@ -38,3 +38,21 @@ window.imageSwitcher = function () {
         }
     }
 }
+
+window.sidebar = function () {
+    return {
+        search_form: null,
+        init: function () {
+            this.search_form = this.$refs.search_form;
+            console.log('Working sidebar! :[O');
+        },
+        submit_form: function (e) {
+            e.preventDefault();
+            let keywork = this.search_form.querySelector('input').value;
+            if (keywork.length > 0) {
+                this.search_form.action = this.search_form.action.replace('keywork', keywork);
+                this.search_form.submit();
+            }
+        }
+    }
+}

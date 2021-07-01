@@ -269,4 +269,38 @@ class ArtworkController extends Controller
         $items = Artwork::paginate(20);
         return view('admin.artworks.list', compact('title', 'items'));
     }
+
+    public function search(Request $request, $keyword) {
+        $validator = Validator::make(['keyword' => $keyword], ['keyword' => 'required|regex:/^[a-z& ]+$/']);
+        if ($validator->fails()) {
+            return redirect()->route('artworks.index');
+        }
+        $autors = Autor::paginate(10);
+        $items = Artwork::where('name', 'like', "%$keyword%")->get();
+        $autors_search = Autor::where('name', 'like', "%$keyword%")->get();
+        $techniques_search = Technique::where('name', 'like', "%$keyword%")->get();
+
+        $autors_search->each(function ($autors) use ($items) {
+            $autors->artwork->each(function ($autor) use ($items) {
+                $items->push($autor);
+            });
+        });
+        $techniques_search->each(function ($techniques) use ($items) {
+            $techniques->artwork->each(function ($technique) use ($items) {
+                $items->push($technique);
+            });
+        });
+
+        $cart = collect([]);
+        $cart->open = 'false';
+        if (Auth()->check()) {
+            $cart = CartItem::where('user_id', '=', Auth()->user()->id)->get();
+            $subtotal = $cart->sum(function($item) {
+                return $item->artwork->price;
+            });
+            $cart->subtotal = $subtotal;
+            $cart->open = $request->session()->get('cart-open') ? 'true' : 'false';
+        }
+        return view('home', compact('autors', 'items', 'cart'));
+    }
 }

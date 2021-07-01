@@ -10,15 +10,15 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
             d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z" />
     </svg>
-    <div x-data="{}" class="grid gap-y-2 group-hover:grid-cols-sidebar">
+    <div x-data="sidebar()" x-init="init()" class="grid gap-y-2 group-hover:grid-cols-sidebar">
         <svg class="w-8 h-8 mx-auto" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
             viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
                 d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <form class="hidden group-hover:flex" action="" method="POST">
+        <form x-ref="search_form" class="hidden group-hover:flex" action="{{ route('search', 'keywork') }}" method="GET">
             <input type="text" class="hidden group-hover:block w-max-32 mx-2 appearance-none border-2 border-orange200 leading-tight focus:outline-none focus:bg-white focus:border-orange500 hover:shadow transition duration-500 ease-in-out text-gray">
-            <button type="submit">Buscar</button>
+            <button @click="submit_form" type="submit">Buscar</button>
         </form>
         @guest
             <svg class="w-8 h-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
