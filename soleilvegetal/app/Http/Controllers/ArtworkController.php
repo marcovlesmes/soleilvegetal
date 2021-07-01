@@ -8,13 +8,12 @@ use App\Models\CartItem;
 use App\Models\Image;
 use App\Models\Technique;
 use Carbon\Carbon;
-use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use stdClass;
+use Illuminate\Validation\Rule;
 
 class ArtworkController extends Controller
 {
@@ -23,10 +22,27 @@ class ArtworkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        $autors = Autor::paginate(10);
-        $items = Artwork::where('exposed', '=', true)->paginate(20);
+    public function index(Request $request) {
+        $validator = Validator::make(
+            [
+                'autors' => $request->autors,
+                'techniques' => $request->techniques
+            ],
+            [
+                'autors' => 'nullable|regex:/^[0-9&]+$/',
+                'techniques' => 'nullable|regex:/^[0-9&]+$/'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('artworks.index');
+        }
+
+        $autors = Autor::get();
+        $techniques = Technique::get();
+        $items = Artwork::with('autor')->where('exposed', '=', true)->whereHas('autor', function ($query) use ($request) {
+            $query->whereNotIn('autor_id', explode('&', $request->autors));
+        })->paginate(21);
+        
         $cart = collect([]);
         $cart->open = 'false';
         if (Auth()->check()) {
@@ -37,7 +53,7 @@ class ArtworkController extends Controller
             $cart->subtotal = $subtotal;
             $cart->open = $request->session()->get('cart-open') ? 'true' : 'false';
         }
-        return view('home', compact('autors', 'items', 'cart'));
+        return view('home', compact('autors', 'techniques', 'items', 'cart'));
     }
 
     /**
@@ -275,7 +291,7 @@ class ArtworkController extends Controller
         if ($validator->fails()) {
             return redirect()->route('artworks.index');
         }
-        $autors = Autor::paginate(10);
+        $autors = Autor::get();
         $items = Artwork::where('name', 'like', "%$keyword%")->get();
         $autors_search = Autor::where('name', 'like', "%$keyword%")->get();
         $techniques_search = Technique::where('name', 'like', "%$keyword%")->get();

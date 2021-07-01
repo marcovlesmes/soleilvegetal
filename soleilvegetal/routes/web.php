@@ -19,6 +19,7 @@ Route::resource('artworks', \App\Http\Controllers\ArtworkController::class)->onl
 Route::resource('cartItems', \App\Http\Controllers\CardItemController::class)->only(['store', 'destroy']);
 Route::resource('addresses', \App\Http\Controllers\AddressController::class)->only(['store', 'update', 'destroy']);
 Route::get('/search/{keyword}', [\App\Http\Controllers\ArtworkController::class, 'search'])->name('search');
+Route::get('/filter/{autors}/{techniques?}', [\App\Http\Controllers\ArtworkController::class, 'index'])->name('filter');
 Route::get('checkout', [\App\Http\Controllers\CardItemController::class, 'checkout'])->middleware('auth')->name('checkout');
 Route::prefix('payu')->group(function() {
     Route::get('confirmation', [\App\Http\Controllers\CardItemController::class, 'payuConfirmation'])->middleware('auth')->name('confirmation');

@@ -9,9 +9,6 @@
                     @foreach ($autors as $autor)
                     <li class="text-primary font-normal capitalize hover:text-secondary text-sm max-w-max p-0 py-3 text-center mx-auto"><a href="{{ route('autors.show', $autor->id) }}">{{$autor->name}}</a></li>
                     @endforeach
-                    @if ($autors->hasMorePages())
-                    <li class="text-primary font-normal capitalize hover:text-secondary text-sm max-w-max p-0 py-3 text-center mx-auto"><a href="{{ route('autors.index') }}">Ver todos</a></li>
-                    @endif
                 </ul>
             </li>
             <li class="group uppercase text-primary text-sm font-semibold hover:text-secondary">
@@ -19,10 +16,31 @@
             </li>
         </ul>
     </div>
-    <div class="my-24 text-primary">
-        <span class="text-secondary">Filtrar por:</span> <a href="#">Artista</a> <a href="#">Técnica</a>
+    <div x-data="filter()" x-init="init()" class="my-20 text-primary">
+        <span class="text-secondary">Filtrar por:</span> <button @click="showAutor = true">Autor</button> <button @click="showTechnique = true">Técnica</button>
+        <form class="divide-y divide-white" x-ref="filter_form" x-show="showAutor || showTechnique" action="{{ route('filter', 'ids') }}">
+            <ul x-show="showAutor" class="grid grid-cols-7 py-5">
+                <h2 class="col-span-7 font-semibold text-lg">Autor</h2>
+                @foreach ($autors as $autor)
+                    <li>
+                        <input id="autor_{{ $autor->id }}" x-on:change="checkSwap" type="checkbox" checked>
+                        <label for="autor_{{ $autor->id }}">{{ $autor->name }}</label>
+                    </li>
+                @endforeach
+            </ul>
+            <ul x-show="showTechnique" class="grid grid-cols-7 py-5">
+                <h2 class="col-span-7 font-semibold text-lg">Técnica</h2>
+                @foreach ($techniques as $technique)
+                    <li>
+                        <input id="technique_{{ $technique->id }}" x-on:change="checkSwap" type="checkbox" checked>
+                        <label for="technique_{{ $technique->id }}">{{ $technique->name }}</label>
+                    </li>
+                @endforeach
+            </ul>
+            <button @click="filter" class="bg-yellow-300 text-white px-3 py-1">Aceptar</button>
+        </form>
     </div>
-    <div class="grid grid-cols-gallery gap-4">
+    <div class="grid grid-cols-gallery gap-4 my-5">
         @forelse ($items as $item)
             <div>
                 <a class="text-linky font-semibold" href="{{ Route('artworks.show', $item->id) }}">
@@ -43,7 +61,7 @@
                         @endforeach
                     </div>
                     <div>
-                        {{ $item->format }} - <span class="font-bold">${{ $item->price }}</span>
+                        {{ $item->format }} - <span class="font-bold">€{{ $item->price }}</span>
                     </div>
                 </div>
             </div>
@@ -51,7 +69,5 @@
             <p>No se encontraron obras.</p>
         @endforelse
     </div>
-    @if (isset($items->links))
-        {{ $items->links() }}
-    @endif
+    {{ $items->links() }}
 @endsection

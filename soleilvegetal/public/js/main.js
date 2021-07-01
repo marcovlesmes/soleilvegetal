@@ -56,3 +56,39 @@ window.sidebar = function () {
         }
     }
 }
+
+window.filter = function () {
+    return {
+        filter_form: null,
+        showAutor: false,
+        showTechnique: false,
+        filteredAutors: [],
+        filteredTechniques: [],
+        init: function () {
+            this.filter_form = this.$refs.filter_form;
+            console.log('Working filter... >--O');
+        },
+        checkSwap: function (e) {
+            filterArrays = {'autor': this.filteredAutors, 'technique': this.filteredTechniques};
+            let [type, id] = e.target.id.split('_');
+            if (e.target.checked) {
+                let index = filterArrays[type].indexOf(id);
+                filterArrays[type].splice(index, 1);
+            } else {
+                filterArrays[type].push(id);
+            }
+        },
+        filter: function (e) {
+            e.preventDefault();
+            if (this.filteredAutors.length > 0 || this.filteredTechniques.length > 0) {
+                let filtered_autors = this.filteredAutors.length > 0 ? this.filteredAutors.join('&') : '0';
+                let url = this.filter_form.action.replace('ids', filtered_autors) + '/' + this.filteredTechniques.join('&');
+                this.filter_form.action = url;
+                this.filter_form.submit();
+            }
+
+            this.showAutor = false;
+            this.showTechnique = false;
+        }
+    }
+}
