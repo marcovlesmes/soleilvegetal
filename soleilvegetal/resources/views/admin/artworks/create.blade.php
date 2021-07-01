@@ -90,7 +90,7 @@
                 @enderror
             </div>
             <div class="flex flex-col border border-white p-2 rounded-sm">
-                <label class="pl-3 pb-1 font-semibold" for="price">Precio</label>
+                <label class="pl-3 pb-1 font-semibold" for="price">Precio (€)</label>
                 <input class="p-2" type="text" name="price" id="price" value="{{ $item->price }}">
                 @error('price')
                     <small class="text-red-600">{{ $message }}</small>

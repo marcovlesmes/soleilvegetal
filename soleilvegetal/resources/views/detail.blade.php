@@ -43,7 +43,7 @@
                 <span class="font-medium">Edición:</span> <span class="text-primary">{{ $item->edition }}</span>
                 <span class="font-medium">Colofón:</span>
                 <p class="text-primary">{{ $item->description }}</p>
-                <span class="font-medium">Precio:</span> <span class="text-primary">${{ $item->price }}</span>
+                <span class="font-medium">Precio:</span> <span class="text-primary">€{{ $item->price }}</span>
             </div>
         </div>
         <div class="flex mt-6 gap-x-2">

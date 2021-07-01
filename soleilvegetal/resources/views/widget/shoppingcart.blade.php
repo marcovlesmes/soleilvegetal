@@ -14,7 +14,7 @@
                             src="{{ asset($item->artwork->image->where('priority', '=', 0)->first()->image_source) }}" alt="">
                         <ul class="mx-3">
                             <li class="text-primary">{{ $item->artwork->name }}</li>
-                            <li>${{ $item->artwork->price }}</li>
+                            <li>€{{ $item->artwork->price }}</li>
                             <li><button @click="destroy( {{ $item->id }} )" class="text-linky"
                                     href="#">Quitar</button></li>
                         </ul>
@@ -27,7 +27,7 @@
                     <input type="text" name="id" id="delete-input">
                 </form>
                 <div>
-                    <span>Subtotal</span><span>${{ $cart->subtotal }}</span>
+                    <span>Subtotal</span><span>€{{ $cart->subtotal }}</span>
                     <p class="text-center my-3">Gastos de envío y descuentos calculado al momento de pagar</p>
                     <a class="block bg-orange-500 text-white py-2 px-6 flex-shrink w-full text-center hover:bg-orange-400 transition-colors" href="{{ route('checkout') }}">Checkout <svg
                             class="inline h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"

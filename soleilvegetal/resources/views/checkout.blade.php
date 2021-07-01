@@ -183,13 +183,13 @@
                                     <input class="border" type="number" name="quantity" id="quantity"
                                         value="{{ $item->quantity }}" min="1" max="{{ $item->artwork->stock }}">
                                 </li>
-                                <li>${{ $item->artwork->price }}</li>
+                                <li>€{{ $item->artwork->price }}</li>
                             </ul>
                         </div>
                     @endforeach
                     <label for="instructions">Instrucciones de entrega:</label>
                     <textarea name="instructions" id="instructions">{{ old('instructions') }}</textarea>
-                    <p>Subtotal: $<span>{{ $items->subtotal }}</span></p>
+                    <p>Subtotal: €<span>{{ $items->subtotal }}</span></p>
                 </form>
             </div>
         </div>
