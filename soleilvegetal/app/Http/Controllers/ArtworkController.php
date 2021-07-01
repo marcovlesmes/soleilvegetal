@@ -87,7 +87,7 @@ class ArtworkController extends Controller
             'format' => 'required',
             'technique' => 'required',
             'new_technique' => 'requiredIf:technique,new',
-            'edition' => 'required',
+            'edition' => 'nullable',
             'description' => 'required',
             'price' => 'required|numeric',
             'stock' => 'required|numeric',

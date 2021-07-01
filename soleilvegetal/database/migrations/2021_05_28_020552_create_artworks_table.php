@@ -18,7 +18,7 @@ class CreateArtworksTable extends Migration
             $table->string('name');
             $table->string('year', 4)->nullable();
             $table->string('format');
-            $table->string('edition');
+            $table->string('edition')->nullable();
             $table->text('description');
             $table->unsignedBigInteger('price');
             $table->integer('stock');
