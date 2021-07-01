@@ -16,7 +16,7 @@ class CreateArtworksTable extends Migration
         Schema::create('artworks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('year', 4);
+            $table->string('year', 4)->nullable();
             $table->string('format');
             $table->string('edition');
             $table->text('description');

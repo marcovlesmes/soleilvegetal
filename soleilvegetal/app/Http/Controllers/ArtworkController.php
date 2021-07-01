@@ -83,7 +83,7 @@ class ArtworkController extends Controller
             'autor' => 'required',
             'name' => 'required',
             'new_autor' => 'requiredIf:name,new',
-            'year' => 'required',
+            'year' => 'nullable',
             'format' => 'required',
             'technique' => 'required',
             'new_technique' => 'requiredIf:technique,new',
