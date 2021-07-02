@@ -292,6 +292,7 @@ class ArtworkController extends Controller
             return redirect()->route('artworks.index');
         }
         $autors = Autor::get();
+        $techniques = Technique::get();
         $items = Artwork::where('name', 'like', "%$keyword%")->get();
         $autors_search = Autor::where('name', 'like', "%$keyword%")->get();
         $techniques_search = Technique::where('name', 'like', "%$keyword%")->get();
@@ -317,6 +318,6 @@ class ArtworkController extends Controller
             $cart->subtotal = $subtotal;
             $cart->open = $request->session()->get('cart-open') ? 'true' : 'false';
         }
-        return view('home', compact('autors', 'items', 'cart'));
+        return view('home', compact('autors', 'techniques', 'items', 'cart'));
     }
 }

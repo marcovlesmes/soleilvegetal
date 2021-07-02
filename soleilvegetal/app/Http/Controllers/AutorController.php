@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artwork;
 use App\Models\Autor;
 use App\Models\CartItem;
+use App\Models\Technique;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AutorController extends Controller
 {
@@ -47,9 +50,16 @@ class AutorController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $autor = Autor::find($id);
-        $items = $autor->artwork->where('exposed', '=', true);
-        $autors = Autor::paginate(10);
+        $validator = Validator::make(['id' => $id], ['id' => 'required|numeric']);
+        if ($validator->fails()) {
+            return redirect()->route('home');
+        }
+        $items = Artwork::whereHas('autor', function ($q) use ($id) {
+            $q->where('autors.id', '=', $id);
+        })->paginate(21);
+
+        $autors = Autor::get();
+        $techniques = Technique::get();
         $cart = collect([]);
         if (Auth()->check()) {
             $cart = CartItem::where('user_id', '=', Auth()->user()->id)->get();
@@ -59,7 +69,7 @@ class AutorController extends Controller
             $cart->subtotal = $subtotal;
             $cart->open = $request->session()->get('cart-open') ? 'true' : 'false';
         }
-        return view('home', compact('autors', 'items', 'cart'));
+        return view('home', compact('autors', 'techniques', 'items', 'cart'));
     }
 
     /**
