@@ -16,14 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::resource('autors', \App\Http\Controllers\AutorController::class)->only(['index', 'show']);
 Route::resource('artworks', \App\Http\Controllers\ArtworkController::class)->only(['index', 'show']);
-Route::resource('cartItems', \App\Http\Controllers\CardItemController::class)->only(['store', 'destroy']);
+Route::resource('cartItems', \App\Http\Controllers\CartItemController::class)->only(['store', 'destroy']);
 Route::resource('addresses', \App\Http\Controllers\AddressController::class)->only(['store', 'update', 'destroy']);
 Route::get('/search/{keyword}', [\App\Http\Controllers\ArtworkController::class, 'search'])->name('search');
 Route::get('/filter/{autors}/{techniques?}', [\App\Http\Controllers\ArtworkController::class, 'index'])->name('filter');
-Route::get('checkout', [\App\Http\Controllers\CardItemController::class, 'checkout'])->middleware('auth')->name('checkout');
+Route::get('checkout', [\App\Http\Controllers\CartItemController::class, 'checkout'])->middleware('auth')->name('checkout');
 Route::prefix('payu')->group(function() {
-    Route::get('confirmation', [\App\Http\Controllers\CardItemController::class, 'payuConfirmation'])->middleware('auth')->name('confirmation');
-    Route::post('response', [\App\Http\Controllers\CardItemController::class, 'payuResponse'])->name('response');
+    Route::get('confirmation', [\App\Http\Controllers\CartItemController::class, 'payuConfirmation'])->middleware('auth')->name('confirmation');
+    Route::post('response', [\App\Http\Controllers\CartItemController::class, 'payuResponse'])->name('response');
 });
 Route::prefix('dashboard')->middleware('auth')->group(function() {
     Route::get('/', [\App\Http\Controllers\CarouselController::class, 'index'])->name('dashboard');

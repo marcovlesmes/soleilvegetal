@@ -6,7 +6,7 @@
             <button @click="isOpen = false" class="text-sm ml-8 mr-3 cursor-pointer">X</button>
         </div>
         <hr class="border border-gray-200 w-full my-5">
-        <div x-data="cardItem()" x-init="init()" class="divide-y divide-gray-200">
+        <div x-data="cartItem()" x-init="init()" class="divide-y divide-gray-200">
             @if (count($cart) > 0)
                 @foreach ($cart as $item)
                     <div id="item-{{ $item->id }}" class="item-cart flex justify-evenly my-5 py-3">

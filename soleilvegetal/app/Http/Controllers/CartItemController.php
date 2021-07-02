@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use stdClass;
 
-class CardItemController extends Controller
+class CartItemController extends Controller
 {
     private function createOrder($items, $addresses) {
         $items_id = $items->map(function ($item) {

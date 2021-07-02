@@ -17,9 +17,9 @@
         </ul>
     </div>
     <div x-data="filter()" x-init="init()" class="my-20 text-primary">
-        <span class="text-secondary">Filtrar por:</span> <button @click="showAutor = true">Autor</button> <button @click="showTechnique = true">Técnica</button>
-        <form class="divide-y divide-white" x-ref="filter_form" x-show="showAutor || showTechnique" action="{{ route('filter', 'ids') }}">
-            <ul x-show="showAutor" class="grid grid-cols-7 py-5">
+        <span class="text-secondary">Filtrar por:</span> <button @click="show_autor = true">Autor</button> <button @click="show_technique = true">Técnica</button>
+        <form class="divide-y divide-white" x-ref="filter_form" x-show="show_autor || show_technique" action="{{ route('filter', 'ids') }}">
+            <ul x-ref="autors" x-show="show_autor" class="grid grid-cols-7 py-5">
                 <h2 class="col-span-7 font-semibold text-lg">Autor</h2>
                 @foreach ($autors as $autor)
                     <li>
@@ -28,7 +28,7 @@
                     </li>
                 @endforeach
             </ul>
-            <ul x-show="showTechnique" class="grid grid-cols-7 py-5">
+            <ul x-ref="techniques" x-show="show_technique" class="grid grid-cols-7 py-5">
                 <h2 class="col-span-7 font-semibold text-lg">Técnica</h2>
                 @foreach ($techniques as $technique)
                     <li>

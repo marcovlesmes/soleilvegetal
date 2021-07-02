@@ -23,9 +23,10 @@ class ArtworkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
+        $autorsFiltered = $request->autor;
         $validator = Validator::make(
             [
-                'autors' => $request->autors,
+                'autors' => $autorsFiltered,
                 'techniques' => $request->techniques
             ],
             [
@@ -39,8 +40,8 @@ class ArtworkController extends Controller
 
         $autors = Autor::get();
         $techniques = Technique::get();
-        $items = Artwork::with('autor')->where('exposed', '=', true)->whereHas('autor', function ($query) use ($request) {
-            $query->whereNotIn('autor_id', explode('&', $request->autors));
+        $items = Artwork::with('autor')->where('exposed', '=', true)->whereHas('autor', function ($query) use ($autorsFiltered) {
+            $query->whereNotIn('autor_id', explode('&', $autorsFiltered));
         })->paginate(21);
         
         $cart = collect([]);
