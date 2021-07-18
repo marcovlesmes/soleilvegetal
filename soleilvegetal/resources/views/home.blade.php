@@ -69,7 +69,7 @@
             <p>No se encontraron obras.</p>
         @endforelse
     </div>
-    @if ($items->isNotEmpty())
+    @if ($items->isNotEmpty() && method_exists($items, 'links'))
     <div class="flex justify-center my-5">
         {{ $items->links() }}
     </div>
