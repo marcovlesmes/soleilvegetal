@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="grid grid-cols-dictionary gap-y-8 gap-x-16">
+    <div class="grid grid-cols-dictionary gap-y-8 gap-x-16 py-5">
         <div class="col-span-2 mb-14">
             <a class="block mb-6" href="{{ route('artworks.index') }}">
                 <svg class="h-3 w-3 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
