@@ -12,29 +12,38 @@
     </nav>
 <div x-data="listedItems()" x-init="init()">
     <div class="bg-white w-10/12 border-2 border-green-500 mx-auto mb-4">
-        <table class="table-auto w-full  text-gray-600 bg-green-300 ">
+        <table class="table-auto w-full text-gray-600 bg-green-300 ">
             <thead>
                 <tr class="uppercase text-base">
-                    <th class="px-3 py-4 cursor-pointer border-r">Artista</th>
-                    <th class="px-3 py-4 cursor-pointer border-r">Técnica</th>
+                    <th class="px-3 py-4 cursor-pointer border-r">Codigo</th>
+                    <th class="px-3 py-4 cursor-pointer border-r">Usuario cliente</th>
+                    <th class="px-3 py-4 cursor-pointer border-r">Dirección</th>
+                    <th class="px-3 py-4 cursor-pointer border-r">E-mail</th>
                     <th class="px-3 py-4 cursor-pointer border-r">Obra</th>
+                    <th class="px-3 py-4 cursor-pointer border-r">Formato</th>
+                    <th class="px-3 py-4 cursor-pointer border-r">Edición</th>
+                    <th class="px-3 py-4 cursor-pointer border-r">Precio</th>
                     <th class="px-3 py-4 cursor-pointer border-r">Stock</th>
-                    <th class="px-3 py-4 cursor-pointer border-r">Acciones</th>
+                    <th class="px-3 py-4 cursor-pointer border-r">Pública</th>
                 </tr>
             </thead>
             <tbody class="text-sm">
                 @forelse ($items as $item)
                     <tr class="border-solid border-2 bg-white">
                         <td class="border-r p-2">
-                            @foreach ($item->autor as $autor)
+                            @foreach ($item->artwork->autor as $autor)
                             {{ $autor->name }}    
                             @endforeach
                         </td>
+                        @if ($item->transaction)
                         <td class="border-r p-2">
-                            @foreach ($item->technique as $technique)
-                            {{ $technique->name }}    
+                            @foreach ($item->transaction->transaction_id as $technique)
+                            {{ $technique->name }}
                             @endforeach
                         </td>
+                        @endif
+                        {{ dd($item->transaction) }}
+                        
                         <td class="border-r p-2">
                             {{ $item->name }}
                         </td>

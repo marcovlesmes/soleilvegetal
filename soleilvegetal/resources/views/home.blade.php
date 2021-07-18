@@ -40,7 +40,7 @@
             <button @click="filter" class="bg-yellow-300 text-white px-3 py-1">Aceptar</button>
         </form>
     </div>
-    <div class="grid grid-cols-gallery gap-4 my-5">
+    <div class="grid grid-cols-gallery gap-4 gap-y-20 my-5">
         @forelse ($items as $item)
             <div>
                 <a class="text-linky font-semibold" href="{{ Route('artworks.show', $item->id) }}">
@@ -69,5 +69,7 @@
             <p>No se encontraron obras.</p>
         @endforelse
     </div>
-    {{ $items->links() }}
+    <div class="flex justify-center my-5">
+        {{ $items->links() }}
+    </div>
 @endsection

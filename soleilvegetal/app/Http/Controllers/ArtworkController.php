@@ -80,21 +80,6 @@ class ArtworkController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make($request->all(), [
-            'autor' => 'required',
-            'name' => 'required',
-            'new_autor' => 'requiredIf:name,new',
-            'year' => 'nullable',
-            'format' => 'required',
-            'technique' => 'required',
-            'new_technique' => 'requiredIf:technique,new',
-            'edition' => 'nullable',
-            'description' => 'required',
-            'price' => 'required|numeric',
-            'stock' => 'required|numeric',
-            'deleteImages' => 'required'
-        ])->validate();
-
         $autor_id = $request->autor;
         if ($request->autor == 'new') {
             $autor = new Autor();
@@ -192,21 +177,6 @@ class ArtworkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Validator::make($request->all(), [
-            'autor' => 'required|alpha_num',
-            'name' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
-            'new_autor' => 'requiredIf:name,new',
-            'year' => 'required|regex:/^[0-9]+$/',
-            'format' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
-            'technique' => 'required|alpha_num',
-            'new_technique' => 'requiredIf:technique,new',
-            'edition' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
-            'description' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
-            'price' => 'required|numeric',
-            'stock' => 'required|numeric',
-            'deleteImages' => 'required|regex:/^[0-9\[\]]+$/'
-        ])->validate();
-
         $autor_id = $request->autor;
         if ($request->autor == 'new') {
             $autor = new Autor();

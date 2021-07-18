@@ -158,7 +158,9 @@ class CartItemController extends Controller
 
         $buyItItems = $this->decodeReferenceSaleCode($request->reference_sale);
         foreach($buyItItems->items_id as $item) {
-            CartItem::where('user_id', $buyItItems->user_id)->where('artwork_id', $item->id)->delete();
+            $item = CartItem::where('user_id', $buyItItems->user_id)->where('artwork_id', $item->id)->first();
+            $item->buyit = true;
+            $item->save();
         }
 
         return response()->json(['success' => 'success'], 200);

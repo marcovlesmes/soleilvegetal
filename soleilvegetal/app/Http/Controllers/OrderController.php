@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartItem;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,7 +15,8 @@ class OrderController extends Controller
     public function index()
     {
         $title = 'Ordenes';
-        //$items = 
+        $items = CartItem::where('buyit', '<>', 0)->orderBy('created_at', 'desc')->paginate(20);
+        return view('admin.payments.list', compact('title', 'items'));
     }
 
     /**

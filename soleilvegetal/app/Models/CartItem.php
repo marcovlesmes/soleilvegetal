@@ -16,4 +16,8 @@ class CartItem extends Model
     public function artwork() {
         return $this->belongsTo(Artwork::class);
     }
+
+    public function transaction() {
+        return $this->belongsTo(Transaction::class);
+    }
 }
