@@ -6,11 +6,11 @@
                 <svg class="h-3 w-3 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                   </svg>
-                Regresar 
+                {{ __('common.go_back') }} 
             </a>
-            <h2 class="text-3xl text-primary">Título: {{ $item->name }}</h2>
+            <h2 class="text-3xl text-primary">{{ __('common.title') }}: {{ $item->name }}</h2>
             <p class="font-medium">{{ $item->year }}</p>
-            <p class="font-medium">Autor: {{ $item->autor->first()->name }}</p>
+            <p class="font-medium">{{ __('common.artist') }}: {{ $item->autor->first()->name }}</p>
         </div>
         <div x-data="imageSwitcher()" x-init="init()">
             <div x-ref="mainContainer" class="preview-image mb-6">
@@ -31,23 +31,23 @@
             </ul>
         </div>
         <div>
-            <h3 class="text-lg font-semibold text-gray-800 my-6 pb-2 ">Acerca de La Obra: </h3>
+            <h3 class="text-lg font-semibold text-gray-800 my-6 pb-2 ">{{ __('common.about_the_artwork') }}: </h3>
             <div class="grid grid-cols-dictionary gap-y-2">
-                <span class="font-medium mb-12">Título:</span> <span class="text-primary mb-12">{{ $item->name }}</span>
-                <span class="font-medium mb-6">Año:</span> <span class="text-primary mb-4">{{ $item->year }}</span>
-                <span class="font-medium">Autor:</span> <span
+                <span class="font-medium mb-12">{{ __('common.title') }}:</span> <span class="text-primary mb-12">{{ $item->name }}</span>
+                <span class="font-medium mb-6">{{ __('common.year') }}:</span> <span class="text-primary mb-4">{{ $item->year }}</span>
+                <span class="font-medium">{{ __('common.artist') }}:</span> <span
                     class="text-primary">{{ $item->autor->first()->name }}</span>
-                <span class="font-medium">Técnica:</span> <span
+                <span class="font-medium">{{ __('common.technique') }}:</span> <span
                     class="text-primary">{{ $item->technique->first()->name }}</span>
-                <span class="font-medium">Formato:</span> <span class="text-primary">{{ $item->format }}</span>
-                <span class="font-medium">Edición:</span> <span class="text-primary">{{ $item->edition }}</span>
-                <span class="font-medium">Colofón:</span>
+                <span class="font-medium">{{ __('common.format') }}:</span> <span class="text-primary">{{ $item->format }}</span>
+                <span class="font-medium">{{ __('common.edition') }}:</span> <span class="text-primary">{{ $item->edition }}</span>
+                <span class="font-medium">{{ __('common.colophon') }}:</span>
                 <p class="text-primary">{{ $item->description }}</p>
-                <span class="font-medium">Precio:</span> <span class="text-primary">€{{ $item->price }}</span>
+                <span class="font-medium">{{ __('commerce.price') }}:</span> <span class="text-primary">€{{ $item->price }}</span>
             </div>
         </div>
         <div class="flex mt-6 gap-x-2">
-            <p class="px-4 text-primary font-medium">Comparte</p>
+            <p class="px-4 text-primary font-medium">{{ __('common.share') }}</p>
             <a class="p-1 text-primary hover:text-secondary active:text-secondary focus:outline-none transition-all duration-150 border-2 border-green-900"
                 href="#">
                 <svg class="h-4 w-4 mx-auto" viewBox="0 0 24 24" stroke-width="2" stroke="none" fill="currentColor"
@@ -85,7 +85,7 @@
         <form action="{{ route('cartItems.store') }}" method="post">
         @csrf
         <input type="text" class="hidden" name="id" value="{{ $item->id }}">
-        <button class="block bg-orange-500 text-white py-2 px-6 flex-shrink w-1/3 hover:bg-orange-400 transition-colors" type="submit">Agregar <svg class="inline h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button class="block bg-orange-500 text-white py-2 px-6 flex-shrink w-1/3 hover:bg-orange-400 transition-colors" type="submit">{{ __('common.add') }} <svg class="inline h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg></button>
           @error('id')
@@ -93,7 +93,7 @@
           @enderror
         </form>
         @else
-            <span style="color:red">Este articulo no está disponible.</span>
+            <span style="color:red">{{ __('common.this_article_is_not_available') }}</span>
         @endif
         
     </div>

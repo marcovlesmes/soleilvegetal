@@ -17,8 +17,8 @@
 </head>
 <body class="bg-gray-200 flex">
     @include('admin.sidebar')
-    <div class="container mx-auto mt-5">
-        <h1 class="text-3xl text-primary font-medium">{{ $title }}</h1>
+    <div class="container mx-auto mt-5 p-3">
+        <h1 class="text-3xl text-primary font-medium my-3">{{ $title }}</h1>
         @yield('content')
     </div>
 </body>

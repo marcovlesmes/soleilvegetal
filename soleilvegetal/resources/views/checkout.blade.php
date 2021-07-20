@@ -70,10 +70,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                     </svg>
-                    Regresar a la tienda
+                    {{ __('common.go_back') }}
                 </a>
                 <h1 class="text-3xl font-semibold my-6 pb-2 text-center text-primary">Checkout</h1>
-                <h2 class="text-gray-500">Domicilio</h2>
+                <h2 class="text-gray-500">{{ __('user.address') }}</h2>
                 @forelse ($addresses as $address)
                     <ul>
                         <li class="bg-white w-full p-3 my-5">
@@ -82,17 +82,16 @@
                             <span
                                 class="text-gray-400 text-sm">{{ $address->detail . ' - ' . $address->city . ', ' . $address->state }}
                             </span>
-                            <a class="block text-linky" href="#">Modificar</a>
+                            <a class="block text-linky" href="#">{{ __('common.modify') }}</a>
                         </li>
                     </ul>
                 @empty
-                    <p class="my-3">No tienes registrada ninguna dirección de envío. Agregar una nueva dirección de
-                        envío.</p>
+                    <p class="my-3">{{ __('user.no_address_found') }}.</p>
                     <form class="grid grid-cols-2 gap-4" method="POST" action="{{ route('addresses.store') }}">
                         @csrf
                         <div class="flex flex-col my-2">
                             <label class="block text-gray-700 text-lg font-medium ml-4 pl-2"
-                                for="state">Departamento:</label>
+                                for="state">{{ __('common.state') }}:</label>
                             <input
                                 class="block w-full mt-2 ml-2 p-2 appearance-none border-2 border-orange200 leading-tight focus:outline-none focus:bg-white focus:border-orange500 hover:shadow transition duration-500 ease-in-out text-gray @error('state') border border-red-900 @enderror"
                                 type="text" name="state" id="state" value="{{ old('state') }}">
@@ -101,7 +100,7 @@
                             @enderror
                         </div>
                         <div class="flex flex-col my-2">
-                            <label class="block text-gray-700 text-lg font-medium ml-4 pl-2" for="city">Ciudad:</label>
+                            <label class="block text-gray-700 text-lg font-medium ml-4 pl-2" for="city">{{ __('common.city') }}:</label>
                             <input
                                 class="block w-full mt-2 ml-2 p-2 appearance-none border-2 border-orange200 leading-tight focus:outline-none focus:bg-white focus:border-orange500 hover:shadow transition duration-500 ease-in-out text-gray @error('city') border border-red-900 @enderror"
                                 type="text" name="city" id="city" value="{{ old('city') }}">
@@ -110,7 +109,7 @@
                             @enderror
                         </div>
                         <div class="flex flex-col my-2">
-                            <label class="block text-gray-700 text-lg font-medium ml-4 pl-2" for="street">Vía:</label>
+                            <label class="block text-gray-700 text-lg font-medium ml-4 pl-2" for="street">{{ __('common.street') }}:</label>
                             <input
                                 class="block w-full mt-2 ml-2 p-2 appearance-none border-2 border-orange200 leading-tight focus:outline-none focus:bg-white focus:border-orange500 hover:shadow transition duration-500 ease-in-out text-gray @error('street') border border-red-900 @enderror"
                                 type="text" name="street" id="street" value="{{ old('street') }}">
@@ -120,7 +119,7 @@
                         </div>
                         <div class="flex flex-col my-2">
                             <label class="block text-gray-700 text-lg font-medium ml-4 pl-2"
-                                for="number">Número:</label>
+                                for="number">{{ __('common.number') }}:</label>
                             <div class="flex">
                                 <div class="relative">
                                     <span class="absolute inset-y-2 left-0 pl-6 text-lg text-gray-300 pt-1 flex items-center">#</span>
@@ -146,8 +145,7 @@
                             </div>
                         </div>
                         <div class="flex flex-col my-2">
-                            <label class="block text-gray-700 text-lg font-medium ml-4 pl-2" for="detail">Datos
-                                adicionales (opcional):</label>
+                            <label class="block text-gray-700 text-lg font-medium ml-4 pl-2" for="detail">{{ __('common.optional_data') }} ({{ str_to_lower(__('common.opcional')) }}):</label>
                             <input
                                 class="block w-full mt-2 ml-2 p-2 appearance-none border-2 border-orange200 leading-tight focus:outline-none focus:bg-white focus:border-orange500 hover:shadow transition duration-500 ease-in-out text-gray @error('detail') border border-red-900 @enderror"
                                 type="text" name="detail" id="detail" value="{{ old('detail') }}">
@@ -156,12 +154,12 @@
                             @enderror
                         </div>
                         <div class="flex flex-col-reverse items-end">
-                            <button type="submit" class="block h-10 bg-orange-500 text-white py-2 px-6 flex-shrink w-1/3 hover:bg-orange-400 transition-colors" type="submit">Añadir</button>
+                            <button type="submit" class="block h-10 bg-orange-500 text-white py-2 px-6 flex-shrink w-1/3 hover:bg-orange-400 transition-colors" type="submit">{{ __('common.add') }}</button>
                         </div>
                     </form>
                 @endforelse
                 @if ($addresses->count() > 0)
-                    <h2 class="text-gray-500">Modo de pago</h2>
+                    <h2 class="text-gray-500">{{ __('commerce.pay_mode') }}</h2>
                     <form method="post" action="{{ env('PAYU_URL') }}">
                         @foreach ($order as $key => $value)
                         <input name="{{ $key }}" type="hidden" value="{{ $value }}">    
@@ -179,7 +177,7 @@
                             <ul>
                                 <li class="text-primary">{{ $item->artwork->name }}</li>
                                 <li>
-                                    <label for="quantity">Cantidad:</label>
+                                    <label for="quantity">{{ __('commerce.quantity') }}:</label>
                                     <input class="border" type="number" name="quantity" id="quantity"
                                         value="{{ $item->quantity }}" min="1" max="{{ $item->artwork->stock }}">
                                 </li>
@@ -187,7 +185,7 @@
                             </ul>
                         </div>
                     @endforeach
-                    <label for="instructions">Instrucciones de entrega:</label>
+                    <label for="instructions">{{ __('commerce.delivery_instructions') }}:</label>
                     <textarea name="instructions" id="instructions">{{ old('instructions') }}</textarea>
                     <p>Subtotal: €<span>{{ $items->subtotal }}</span></p>
                 </form>

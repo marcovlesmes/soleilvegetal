@@ -11,8 +11,8 @@
           </svg></a>
     </nav>
 <div x-data="listedItems()" x-init="init()">
-    <div class="bg-white w-10/12 border-2 border-green-500 mx-auto mb-4">
-        <table class="table-auto w-full  text-gray-600 bg-green-300 ">
+    <div class="bg-white w-10/12 border-2 border-yellow-500 mx-auto mb-4">
+        <table class="table-auto w-full  text-gray-600 bg-yellow-300 ">
             <thead>
                 <tr class="uppercase text-base">
                     <th class="px-3 py-4 cursor-pointer border-r">Artista</th>
@@ -78,5 +78,7 @@
     @method('DELETE')
     </form>
 </div>
+<div class="flex justify-center my-5">
     {{ $items->links() }}
+</div>
 @endsection

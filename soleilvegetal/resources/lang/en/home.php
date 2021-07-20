@@ -1,0 +1,4 @@
+<?php
+return [
+    'main' => "Avec plus de 30 ans d'expérience dans le monde de l'art en Amérique et en Europe, David Rodríguez se condense dans une sélection d'œuvres d'artistes de premier plan dans diverses techniques, pour faire vivre les expériences, les expériences et les émotions de ses auteurs, pour Avec plus de 30 ans d'expérience dans le monde de l'art en Amérique et en Europe, David Rodríguez se condense dans une sélection d'œuvres d'artistes de premier plan dans diverses techniques, pour faire vivre les expériences, les expériences et les émotions de ses auteurs, pour Avec plus de 30 ans d'expérience dans le monde de l'art en Amérique et en Europe, David Rodríguez se condense dans une sélection d'œuvres d'artistes de premier plan dans diverses techniques, pour faire vivre les expériences, les expériences et les émotions de ses auteurs, pour Avec plus de 30 ans d'expérience dans le monde de l'art en Amérique et en Europe",
+];

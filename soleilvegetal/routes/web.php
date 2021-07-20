@@ -33,4 +33,5 @@ Route::prefix('dashboard')->middleware('auth')->group(function() {
     Route::resource('artworks', \App\Http\Controllers\ArtworkController::class)->except(['index', 'show']);
     Route::resource('orders', \App\Http\Controllers\OrderController::class);
 });
+Route::get('/lan/{language}', [\App\Http\Controllers\HomeController::class, 'set_language'])->name('set.language');
 Auth::routes();

@@ -2,7 +2,7 @@
     <nav x-show="isOpen" x-on:toggle.window="isOpen = !isOpen"
         class=" group fixed right-0 top-0 bg-white h-full flex flex-col max-w-sm items-center z-50 p-3 overflow-y-scroll">
         <div class="flex w-full justify-between">
-            <h2 class="text-gray-400 text-2xl font-serif">Carrito de compras</h2>
+            <h2 class="text-gray-400 text-2xl font-serif">{{ __('commerce.shopping_cart') }}</h2>
             <button @click="isOpen = false" class="text-sm ml-8 mr-3 cursor-pointer">X</button>
         </div>
         <hr class="border border-gray-200 w-full my-5">
@@ -16,7 +16,7 @@
                             <li class="text-primary">{{ $item->artwork->name }}</li>
                             <li>€{{ $item->artwork->price }}</li>
                             <li><button @click="destroy( {{ $item->id }} )" class="text-linky"
-                                    href="#">Quitar</button></li>
+                                    href="#">{{ __('common.remove') }}</button></li>
                         </ul>
                     </div>
                 @endforeach
@@ -28,7 +28,7 @@
                 </form>
                 <div>
                     <span>Subtotal</span><span>€{{ $cart->subtotal }}</span>
-                    <p class="text-center my-3">Gastos de envío y descuentos calculado al momento de pagar</p>
+                    <p class="text-center my-3">{{ __('commerce.shipping_cost_and_discounts_calculated_at_checkout') }}</p>
                     <a class="block bg-orange-500 text-white py-2 px-6 flex-shrink w-full text-center hover:bg-orange-400 transition-colors" href="{{ route('checkout') }}">Checkout <svg
                             class="inline h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                             fill="currentColor">
@@ -38,7 +38,7 @@
                         </svg></a>
                 </div>
             @else
-                <p class="p-3" style="color:gray">No hay items en el carro de compras.</p>
+                <p class="p-3" style="color:gray">{{ __('commerce.there_are_no_items_in_the_shopping_cart') }}</p>
             @endif
         </div>
 

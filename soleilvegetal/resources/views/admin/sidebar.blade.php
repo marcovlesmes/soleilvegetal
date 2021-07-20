@@ -1,7 +1,7 @@
 <nav
     class="bg-white h-full flex flex-col items-start shadow-sm z-50 p-3">
     <a class="block ml-20 my-5" href="{{ url('/') }}">
-        <img class="h-12 w-auto" src="{{ asset('images/soleil-vegetal-logo.png') }}" alt="Soleil Vegetal">
+        <img class="h-auto w-full" src="{{ asset('images/soleil-vegetal-logo.png') }}" alt="Soleil Vegetal">
     </a>
     <div class="grid gap-y-2 grid-cols-sidebar w-full mt-5">
         <svg class="w-8 h-8 mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

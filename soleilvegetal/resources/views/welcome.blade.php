@@ -88,6 +88,15 @@
             };
         };
     </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-65CZ37J64Z"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-65CZ37J64Z');
+    </script>
 </head>
 
 <body class="bg-gray-200">
@@ -99,7 +108,7 @@
             <ul class="flex-grow flex justify-evenly">
                 <li
                     class="group uppercase text-primary font-semibold hover:text-secondary hover:bg-gray-200 px-5 relative">
-                    <a href="">Artistas</a>
+                    <a href="">{{ __('common.artists') }}</a>
                     <ul class="absolute hidden group-hover:block bg-gray-200 z-10 left-0">
                         @foreach ($autors as $autor)
                             <li
@@ -110,13 +119,13 @@
                     </ul>
                 </li>
                 <li class="group uppercase text-primary font-semibold hover:text-secondary">
-                    <a href="{{ route('artworks.index') }}">Obras</a>
+                    <a href="{{ route('artworks.index') }}">{{ __('common.artworks') }}</a>
                 </li>
                 <li class="group uppercase text-primary font-semibold hover:text-secondary">
-                    <a href="#">Contacto</a>
+                    <a href="#">{{ __('common.contact') }}</a>
                 </li>
-                <li class="group text-gray-300 font-light">
-                    <a href="#">Español</a> - <a href="#">English</a>
+                <li class="group text-gray-900 font-light">
+                    <a href="{{ route('set.language', 'es') }}">Español</a> - <a href="{{ route('set.language', 'en') }}">English</a>
                 </li>
             </ul>
         </nav>
@@ -175,7 +184,7 @@
         </div>
     </div>
     <div class="container mx-auto px-72 mt-5">
-        <p>Avec plus de 30 ans d'expérience dans le monde de l'art en Amérique et en Europe, David Rodríguez se condense dans une sélection d'œuvres d'artistes de premier plan dans diverses techniques, pour faire vivre les expériences, les expériences et les émotions de ses auteurs, pour Avec plus de 30 ans d'expérience dans le monde de l'art en Amérique et en Europe, David Rodríguez se condense dans une sélection d'œuvres d'artistes de premier plan dans diverses techniques, pour faire vivre les expériences, les expériences et les émotions de ses auteurs, pour Avec plus de 30 ans d'expérience dans le monde de l'art en Amérique et en Europe, David Rodríguez se condense dans une sélection d'œuvres d'artistes de premier plan dans diverses techniques, pour faire vivre les expériences, les expériences et les émotions de ses auteurs, pour Avec plus de 30 ans d'expérience dans le monde de l'art en Amérique et en Europe</p>
+        <p>{{ __('home.main') }}</p>
     </div>
 </body>
 

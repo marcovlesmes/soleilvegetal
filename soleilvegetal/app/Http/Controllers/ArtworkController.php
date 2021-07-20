@@ -23,7 +23,7 @@ class ArtworkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        $autorsFiltered = $request->autor;
+        $autorsFiltered = $request->autors;
         $validator = Validator::make(
             [
                 'autors' => $autorsFiltered,
