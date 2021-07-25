@@ -41,15 +41,8 @@ window.imageSwitcher = function () {
         swapImage: function (id) {
             thumb = document.getElementById('thumb-' + id);
             this.mainContainer.querySelector('img').src = thumb.src;
-            //image = document.createElement('img');
-            //image.src = thumb.src;
-            //image.setAttribute('class', 'max-h-full min-w-full object-cover align-botton');
-            //this.mainContainer.innerHTML = '';
-            //this.mainContainer.appendChild(image);
         },
         initZoomImage: function (e) {
-            console.log('main.js: 40 - From initZoomImage...');
-            console.log(e);
             if (!this.imageWidth) {
                 this.imageWidth = e.target.width;
                 this.imageHeight = e.target.height;
@@ -60,9 +53,8 @@ window.imageSwitcher = function () {
             this.viewer.classList.remove('hidden');
         },
         zoomTo: function (e) {
-            console.log('main.js: 40 - From zoomTo...');
             let zeroX = this.image.getBoundingClientRect().left;
-            let zeroY = this.image.getBoundingClientRect().top;
+            let zeroY = this.image.getBoundingClientRect().top + window.scrollY;
             let mouseX = e.clientX;
             let mouseY = e.clientY;
             let half_zoomZoneHeight = this.zoomHeight / 2;
@@ -84,7 +76,6 @@ window.imageSwitcher = function () {
                 );
         },
         killZoomImage: function () {
-            console.log('main.js: 40 - From killZoomImage...');
             this.zoomZone.classList.add('hidden');
             this.viewer.classList.add('hidden')
         }
