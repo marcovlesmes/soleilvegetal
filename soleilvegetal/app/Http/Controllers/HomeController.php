@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use \App\Models\CartItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use stdClass;
 
@@ -27,7 +28,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $items = DB::table('carousel')->where('active', '=', true)->get();
-        $autors = DB::table('autors')->paginate(10);
+        $autors = DB::table('autors')->get();
         $cart = collect([]);
         $cart->open = 'false';
         if (Auth()->check()) {
@@ -39,5 +40,14 @@ class HomeController extends Controller
             $cart->open = $request->session()->get('cart-open') ? 'true' : 'false';
         }
         return view('welcome', compact('autors', 'items', 'cart'));
+    }
+
+    public function set_language($language) {
+        if (! in_array($language, ['en', 'es'])) {
+            abort(400);
+        }
+        App::setLocale($language);
+        
+        return redirect()->route('index');
     }
 }

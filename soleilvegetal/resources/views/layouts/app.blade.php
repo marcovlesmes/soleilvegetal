@@ -39,5 +39,11 @@
     <div class="container mx-auto mt-5">
         @yield('content')
     </div>
+    <footer class="">
+        <ul class="flex flex-col items-end justify-items-center h-16 bg-white text-gray-500 my-5 p-3 shadow" id="contact">
+            <li>Teléfono: 0000000</li>
+            <li>email@soleilvegetal.com</li>
+        </ul>
+    </footer>
 </body>
 </html>

@@ -109,7 +109,7 @@
                 <li
                     class="group uppercase text-primary font-semibold hover:text-secondary hover:bg-gray-200 px-5 relative">
                     <a href="">{{ __('common.artists') }}</a>
-                    <ul class="absolute hidden group-hover:block bg-gray-200 z-10 left-0">
+                    <ul class="absolute hidden group-hover:block bg-gray-200 z-10 left-0 overflow-y-scroll max-h-screen scrollbar scrollbar-thumb-yellow-500 scrollbar-track-gray-100 scrollbar-thin p-1">
                         @foreach ($autors as $autor)
                             <li
                                 class="text-primary font-normal capitalize hover:text-secondary text-sm max-w-max p-3 text-center mx-auto">
@@ -122,14 +122,14 @@
                     <a href="{{ route('artworks.index') }}">{{ __('common.artworks') }}</a>
                 </li>
                 <li class="group uppercase text-primary font-semibold hover:text-secondary">
-                    <a href="#">{{ __('common.contact') }}</a>
+                    <a href="#contact">{{ __('common.contact') }}</a>
                 </li>
                 <li class="group text-gray-900 font-light">
                     <a href="{{ route('set.language', 'es') }}">Español</a> - <a href="{{ route('set.language', 'en') }}">English</a>
                 </li>
             </ul>
         </nav>
-        <nav class="flex justify-end space-x-4 mb-5">
+        <nav class="flex justify-end space-x-4 mb-5"> <!-- Social icons -->
             <a class="p-1 text-primary hover:text-secondary active:text-secondary focus:outline-none transition-all duration-150 border-2 border-green-900"
                 href="#">
                 <svg class="h-4 w-4 mx-auto" viewBox="0 0 24 24" stroke-width="2"
@@ -174,18 +174,32 @@
                 </div>
             @endforeach
         </div>
-        <div @click="scrollTo(prev)" x-show="prev !== null" class="absolute top-1/2 left-1/3 cursor-pointer w-8 h-8 font-bold text-4xl">
+        <div @click="scrollTo(prev)" x-show="prev !== null" class="absolute top-1/2 left-1/4 cursor-pointer w-8 h-8 font-bold text-4xl">
             <!-- left navigation -->
-            <div style="color:white">&lt;</div>
+            <div style="color:white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 bg-black bg-opacity-30 p-2 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </div>
         </div>
-        <div @click="scrollTo(next)" x-show="next !== null" class="absolute top-1/2 right-1/3 cursor-pointer w-8 h-8 font-bold text-4xl">
+        <div @click="scrollTo(next)" x-show="next !== null" class="absolute top-1/2 right-1/4 cursor-pointer w-8 h-8 font-bold text-4xl">
             <!-- right navigation -->
-            <div style="color:white">&gt;</div>
+            <div style="color:white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 bg-black bg-opacity-30 p-2 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+            </div>
         </div>
     </div>
     <div class="container mx-auto px-72 mt-5">
         <p>{{ __('home.main') }}</p>
     </div>
+    <footer class="">
+        <ul class="flex flex-col items-end justify-items-center h-16 bg-white text-gray-500 my-5 p-3 shadow" id="contact">
+            <li>Teléfono: 0000000</li>
+            <li>email@soleilvegetal.com</li>
+        </ul>
+    </footer>
 </body>
 
 </html>
