@@ -125,7 +125,7 @@
                     <a href="#contact">{{ __('common.contact') }}</a>
                 </li>
                 <li class="group text-gray-900 font-light">
-                    <a href="{{ route('set.language', 'es') }}">Español</a> - <a href="{{ route('set.language', 'en') }}">English</a>
+                    <a href="{{ route('set.language', 'es') }}" {{ App::isLocale('es') ? 'class="text-white"' : '' }}>Español</a> - <a href="{{ route('set.language', 'en') }}" {{ App::isLocale('en') ? 'class="text-white"' : '' }}>English</a>
                 </li>
             </ul>
         </nav>

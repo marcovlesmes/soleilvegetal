@@ -9,8 +9,10 @@ use App\Models\Image;
 use App\Models\Technique;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -23,6 +25,9 @@ class ArtworkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
+        if ($language = Session::get('locale')) {
+            App::setLocale($language);
+        }
         $autorsFiltered = $request->autors;
         $validator = Validator::make(
             [
@@ -64,6 +69,9 @@ class ArtworkController extends Controller
      */
     public function create()
     {
+        if ($language = Session::get('locale')) {
+            App::setLocale($language);
+        }
         $title = 'Nueva Obra';
         $artists = Autor::orderBy('name')->get();
         $techniques = Technique::orderBy('name')->get();
@@ -137,6 +145,9 @@ class ArtworkController extends Controller
      */
     public function show(Request $request, $id)
     {
+        if ($language = Session::get('locale')) {
+            App::setLocale($language);
+        }
         $item = Artwork::find($id);
         $cart = collect([]);
         $cart->open = 'false';
@@ -160,6 +171,9 @@ class ArtworkController extends Controller
      */
     public function edit($id)
     {
+        if ($language = Session::get('locale')) {
+            App::setLocale($language);
+        }
         $title = 'Editar Obra';
         $artists = Autor::get();
         $techniques = Technique::get();
@@ -242,6 +256,9 @@ class ArtworkController extends Controller
      */
     public function destroy($id)
     {
+        if ($language = Session::get('locale')) {
+            App::setLocale($language);
+        }
         $images = Image::where('artwork_id', $id)->get();
             foreach ($images as $image) {
                 Storage::disk('public')->delete($image->image_source);
@@ -252,12 +269,18 @@ class ArtworkController extends Controller
     }
 
     public function list() {
+        if ($language = Session::get('locale')) {
+            App::setLocale($language);
+        }
         $title = 'Obras';
         $items = Artwork::paginate(20);
         return view('admin.artworks.list', compact('title', 'items'));
     }
 
     public function search(Request $request, $keyword) {
+        if ($language = Session::get('locale')) {
+            App::setLocale($language);
+        }
         $validator = Validator::make(['keyword' => $keyword], ['keyword' => 'required|regex:/^[a-z& ]+$/']);
         if ($validator->fails()) {
             return redirect()->route('artworks.index');

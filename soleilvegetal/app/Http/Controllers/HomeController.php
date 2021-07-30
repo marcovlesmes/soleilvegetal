@@ -6,6 +6,7 @@ use \App\Models\CartItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use stdClass;
 
 class HomeController extends Controller
@@ -27,6 +28,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        if ($language = Session::get('locale')) {
+            App::setLocale($language);
+        }
         $items = DB::table('carousel')->where('active', '=', true)->get();
         $autors = DB::table('autors')->get();
         $cart = collect([]);
@@ -46,8 +50,7 @@ class HomeController extends Controller
         if (! in_array($language, ['en', 'es'])) {
             abort(400);
         }
-        App::setLocale($language);
-        
-        return redirect()->route('index');
+        Session::put('locale', $language);
+        return back();
     }
 }

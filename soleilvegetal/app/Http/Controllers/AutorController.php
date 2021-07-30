@@ -7,6 +7,8 @@ use App\Models\Autor;
 use App\Models\CartItem;
 use App\Models\Technique;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class AutorController extends Controller
@@ -50,6 +52,9 @@ class AutorController extends Controller
      */
     public function show(Request $request, $id)
     {
+        if ($language = Session::get('locale')) {
+            App::setLocale($language);
+        }
         $validator = Validator::make(['id' => $id], ['id' => 'required|numeric']);
         if ($validator->fails()) {
             return redirect()->route('home');
